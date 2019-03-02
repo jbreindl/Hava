@@ -18,11 +18,14 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image('sky', 'src/View/images/background.png');
+    this.load.image('background', 'src/View/images/background.png');
+    this.load.image('button', 'src/View/images/play.png')
+    this.load.image('logo', 'src/View/images/logo.png')
 }
 
 function create ()
 {
-    this.add.image(300, 300, 'sky');
+    this.add.image(300, 300, 'background');
+    this.add.image(300, 300, 'logo')
 
 }
