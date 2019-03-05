@@ -1,16 +1,10 @@
 package Model.Characters
 
-abstract class character(var movementSpeed: Double, var dfs: Int, var atk: Int,var  HP: Int){
-  var hp = this.HP
+abstract class character(movementSpeed: Double, dfs: Int, atk: Int, HP: Int){
 
-  def basicAttack(enemy: Character): Unit={
-  enemy.HP -= this.atk
-  }
+  def basicAttack(enemy: character): Unit
 
-  def special(character: Character): Unit
+  def special(character: character): Unit
 
-  def getHit(dmg: Int): Unit ={
-    this.HP -= dmg
-  }
-
+  def takeDamage(dmg: Int): Unit
 }

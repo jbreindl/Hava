@@ -1,11 +1,17 @@
 package Model.Characters
 
-class heavy extends character(0.75, 3,1, 15){
-  override def basicAttack(character: Character): Unit = {
-    character.HP-=1
+class heavy(var movementSpeed: Double = 0.75, var dfs: Int = 30, var atk: Int= 10, var HP: Int =125 )
+  extends character(movementSpeed: Double, dfs: Int, atk: Int, HP: Int){
+
+  def basicAttack(enemy: character): Unit={
+    enemy.takeDamage(20*this.atk)
   }
 
-  override def special(character: Character): Unit = {// defense buff for peeling
+  override def special(character: character): Unit = {// defense buff for peeling
     this.dfs = 10
+  }
+
+  override def takeDamage(dmg:Int):Unit={
+    this.HP-= dmg/this.dfs
   }
 }
