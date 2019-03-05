@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Hava.iml" filepath="$PROJECT_DIR$/Hava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Hava.iml" filepath="$PROJECT_DIR$/.idea/Hava.iml" />
     </modules>
   </component>
 </project>
