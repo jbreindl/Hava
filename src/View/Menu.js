@@ -24,6 +24,6 @@ function create ()
     this.add.image(300, 300, 'logo');
     let button = this.add.sprite(300,450, 'button');
     button.setInteractive();
-    button.on('pointerdown', function(){})
+    button.on('pointerdown', function(){console.log("clicked")})
 
 }
