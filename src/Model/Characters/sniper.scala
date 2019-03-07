@@ -1,10 +1,17 @@
 package Model.Characters
 
-class sniper extends character(0.9, 2, 2, 5){
+class sniper(var movementSpeed: Double= 0.8, var dfs: Int = 2, var atk: Int = 2, var HP: Int = 100)
+  extends character(movementSpeed: Double, dfs: Int, atk: Int, HP: Int){
 
-  def basicAttack: Unit
+  override def basicAttack(enemy: character): Unit={
+    enemy.takeDamage(20*this.atk)
+  }
 
-  override def special(character: Character): Unit ={
-    character.HP -= 6
+  override def special(enemy: character): Unit ={
+    enemy.takeDamage(10)
+  }
+
+  override def takeDamage(dmg: Int): Unit={
+    this.HP-= dmg/this.dfs
   }
 }
