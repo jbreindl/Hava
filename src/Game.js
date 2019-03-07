@@ -40,7 +40,8 @@ function create ()
         this.physics.moveToObject(clown, pointer, 40);// last parameter represents speed of class
         this.physics.moveToObject(wasp, pointer, 20);// heavy class is slowest
 
-        Phaser.Utils.Array.Each(
+        Phaser.Utils.Array.Each(          //this moves more than one sprite, possible
+                                            // fast class could have multiple elements
             chicks.getChildren(),
             this.physics.moveToObject,
             this.physics,
