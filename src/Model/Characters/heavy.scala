@@ -1,6 +1,6 @@
 package Model.Characters
 
-class heavy(var movementSpeed: Double = 0.75, var dfs: Int = 30, var atk: Int= 10, var HP: Int =125 )
+class heavy(var movementSpeed: Double = 0.75, var dfs: Int = 3, var atk: Int= 1, var HP: Int =125 )
   extends character(movementSpeed: Double, dfs: Int, atk: Int, HP: Int){
 
   def basicAttack(enemy: character): Unit={
