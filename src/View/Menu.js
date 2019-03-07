@@ -22,13 +22,8 @@ function create ()
 {
     this.add.image(300, 300, 'background');
     this.add.image(300, 300, 'logo');
-    this.add.image(300,450, 'button')
-    const button = (this, 300, 450, 'button', hello(), this);
-    button.setInteractive()
-    this.input.on('pointerdown', hello(), this)
+    let button = this.add.sprite(300,450, 'button');
+    button.setInteractive();
+    button.on('pointerdown', function(){})
 
-}
-
-function hello (){
-    console.log("hello")
 }
