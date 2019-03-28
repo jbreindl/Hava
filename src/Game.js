@@ -1,51 +1,84 @@
 var config = {
     type: Phaser.AUTO,
-    width: 1400,
-    height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: { debug: false }
-    },
+    width: 1200,
+    height: 500,
     scene: {
         preload: preload,
         create: create
     }
 };
 
-new Phaser.Game(config);
+var game = new Phaser.Game(config);
 
-function preload ()
-{
-    this.load.setBaseURL('http://labs.phaser.io');
-    this.load.image('chick', 'assets/sprites/chick.png');// possible fast class
-    this.load.image('clown', 'assets/sprites/clown.png');// possible sniper class
-    this.load.image('wasp', 'assets/sprites/wasp.png');// possible heavy class
-    this.load.image('cursor', 'assets/sprites/drawcursor.png');
-    this.load.image('bg', 'assets/skies/fog.png');
+function preload(){
+    this.load.image("Sprite0", "sprite0.png");
+    this.load.image("Sprite1", "sprite1.png");
+    this.load.image('bg', 'back.png');
 }
 
-function create ()
-{
-    this.add.image(400, 300, 'bg');
-    this.add.image(1000, 300, 'bg');// load background twice to cover entire width of map
-    var chicks = this.physics.add.group({key: 'chick', frameQuantity: 3, setXY: { x: 500, y: 400, stepX: 50 }});
-    var clown = this.physics.add.image(100, 300, 'clown').setVisible(true);
-    var wasp = this.physics.add.image(800, 100, 'wasp').setVisible(true);
-    var cursor = this.add.image(0, 0, 'cursor').setVisible(false);
+function create() {
+    this.add.image(0, 0, 'bg');
+    this.add.image(600, 0, 'bg');
+    this.add.image(800, 0, 'bg');
 
-    this.input.on('pointermove', function (pointer)
-    {
-        cursor.setVisible(false).setPosition(pointer.x, pointer.y);
+    this.image = this.add.image(100, 100, 'Sprite0');
+    this.image1 = this.add.image(200, 200, 'Sprite1');
 
-        this.physics.moveToObject(clown, pointer, 40);// last parameter represents speed of class
-        this.physics.moveToObject(wasp, pointer, 20);// heavy class is slowest
+    this.input.keyboard.on('keydown_A', function event() {
+        if(this.image.x > 20) {
+            this.image.x -= 5;
+        }
+    },
+        this);
 
-        Phaser.Utils.Array.Each(          //this moves more than one sprite, possible
-                                            // fast class could have multiple elements
-            chicks.getChildren(),
-            this.physics.moveToObject,
-            this.physics,
-            pointer, 75);
-    }, this);
+    this.input.keyboard.on('keydown_S', function event() {
+        if(this.image.y < 510) {
+            this.image.y += 5;
+        }
+    },
+        this);
 
+    this.input.keyboard.on('keydown_D', function event() {
+        if(this.image.x < 1210) {
+            this.image.x += 5;
+        }
+    },
+        this);
+
+    this.input.keyboard.on('keydown_W', function event() {
+        if(this.image.y > 20) {
+            this.image.y -= 5;
+        }
+    },
+        this);
+
+//    second sprite
+
+    this.input.keyboard.on('keydown_LEFT', function event() {
+            if(this.image1.x > 20) {
+                this.image1.x -= 10;
+            }
+        },
+        this);
+
+    this.input.keyboard.on('keydown_DOWN', function event() {
+            if(this.image1.y < 510) {
+                this.image1.y += 10;
+            }
+        },
+        this);
+
+    this.input.keyboard.on('keydown_RIGHT', function event() {
+            if(this.image1.x < 1210) {
+                this.image1.x += 10;
+            }
+        },
+        this);
+
+    this.input.keyboard.on('keydown_UP', function event() {
+            if(this.image1.y > 20) {
+                this.image1.y -= 10;
+            }
+        },
+        this);
 }
