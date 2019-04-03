@@ -20,8 +20,8 @@ const config = {
 let game = new Phaser.Game(config);
 
 function preload(){
-    this.load.image("Sprite0", "sprite0.png");
-    this.load.image("Sprite1", "sprite1.png");
+    this.load.image("Sprite0", "shark.png");
+    this.load.image("Sprite1", "minnow.png");
     this.load.image('bg', 'back.png');
 }
 
