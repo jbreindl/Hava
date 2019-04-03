@@ -6,7 +6,7 @@ function distance(x1, x2, y1, y2){
     return Math.sqrt(x_ * x_ + y_ * y_);
 }
 
-
+// boundary 236 to 545
 const config = {
     type: Phaser.AUTO,
     width: 1200,
@@ -27,8 +27,6 @@ function preload(){
 
 function create() {
     this.add.image(0, 0, 'bg');
-    this.add.image(600, 0, 'bg');
-    this.add.image(800, 0, 'bg');
 
     this.shark = this.add.image(config.width / 2, config.height / 2, 'Sprite0');
     this.minnow = this.add.image(50, config.height / 2, 'Sprite1');
@@ -36,6 +34,9 @@ function create() {
     // first sprite
 
     this.input.keyboard.on('keydown_A', function event() {
+            if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50){
+                this.minnow.destroy();
+            }
         if(this.shark.x > 20) {
             this.shark.x -= 5;
         }
@@ -43,6 +44,9 @@ function create() {
         this);
 
     this.input.keyboard.on('keydown_S', function event() {
+            if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50){
+                this.minnow.destroy();
+            }
         if(this.shark.y < 510) {
             this.shark.y += 5;
         }
@@ -50,6 +54,9 @@ function create() {
         this);
 
     this.input.keyboard.on('keydown_D', function event() {
+            if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50){
+                this.minnow.destroy();
+            }
         if(this.shark.x < 1210) {
             this.shark.x += 5;
         }
@@ -57,6 +64,9 @@ function create() {
         this);
 
     this.input.keyboard.on('keydown_W', function event() {
+            if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50){
+                this.minnow.destroy();
+            }
         if(this.shark.y > 20) {
             this.shark.y -= 5;
         }
