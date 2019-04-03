@@ -1,10 +1,16 @@
 // function used to implement hit detection
-
 function distance(x1, x2, y1, y2) {
     let x_ = x1 - x2;
     let y_ = y1 - y2;
     return Math.sqrt(x_ * x_ + y_ * y_);
 }
+
+// destroy sprite function
+function des(spr) {
+    spr.destroy();
+}
+
+
 
 // boundary 236 to 545
 const config = {
@@ -35,7 +41,7 @@ function create() {
 
     this.input.keyboard.on('keydown_A', function event() {
         if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-            this.minnow.destroy();
+            des(this.minnow);
         }
         if (this.shark.x > 236) {
             this.shark.x -= 5;
@@ -44,7 +50,7 @@ function create() {
 
     this.input.keyboard.on('keydown_S', function event() {
         if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-            this.minnow.destroy();
+            des(this.minnow);
         }
         if (this.shark.y < 510) {
             this.shark.y += 5;
@@ -53,7 +59,7 @@ function create() {
 
     this.input.keyboard.on('keydown_D', function event() {
             if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-                this.minnow.destroy();
+                des(this.minnow);
             }
             if (this.shark.x < 545) {
                 this.shark.x += 5;
@@ -62,7 +68,7 @@ function create() {
 
     this.input.keyboard.on('keydown_W', function event() {
             if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-                this.minnow.destroy();
+                des(this.minnow);
             }
             if (this.shark.y > 20) {
                 this.shark.y -= 5;
@@ -74,7 +80,7 @@ function create() {
     this.input.keyboard.on('keydown_LEFT', function event() {
             // hit detection event handler
             if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-                this.minnow.destroy();
+                des(this.minnow);
             }
             if (this.minnow.x > 20) {
                 this.minnow.x -= 10;
@@ -84,7 +90,7 @@ function create() {
     this.input.keyboard.on('keydown_DOWN', function event() {
             // hit detection event handler
             if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-                this.minnow.destroy();
+                des(this.minnow);
             }
             if (this.minnow.y < 510) {
                 this.minnow.y += 10;
@@ -94,7 +100,7 @@ function create() {
     this.input.keyboard.on('keydown_RIGHT', function event() {
             // hit detection event handler
             if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-                this.minnow.destroy();
+                des(this.minnow);
             }
             if (this.minnow.x < 1210) {
                 this.minnow.x += 10;
@@ -104,7 +110,7 @@ function create() {
     this.input.keyboard.on('keydown_UP', function event() {
             // hit detection event handler
             if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-                this.minnow.destroy();
+                des(this.minnow);
             }
             if (this.minnow.y > 20) {
                 this.minnow.y -= 10;
