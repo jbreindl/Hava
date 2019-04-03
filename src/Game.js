@@ -44,7 +44,7 @@ function create() {
             des(this.minnow);
         }
         if (this.shark.x > 236) {
-            this.shark.x -= 5;
+            this.shark.x -= 8;
         }
     }, this);
 
@@ -53,7 +53,7 @@ function create() {
             des(this.minnow);
         }
         if (this.shark.y < 510) {
-            this.shark.y += 5;
+            this.shark.y += 8;
         }
     }, this);
 
@@ -62,7 +62,7 @@ function create() {
                 des(this.minnow);
             }
             if (this.shark.x < 545) {
-                this.shark.x += 5;
+                this.shark.x += 8;
             }
         }, this);
 
@@ -71,7 +71,7 @@ function create() {
                 des(this.minnow);
             }
             if (this.shark.y > 20) {
-                this.shark.y -= 5;
+                this.shark.y -= 8;
             }
         }, this);
 
