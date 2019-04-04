@@ -52,7 +52,7 @@ function create() {
         if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
             des(this.minnow);
         }
-        if (this.shark.y < 510) {
+        if (this.shark.y < 491) {
             this.shark.y += 8;
         }
     }, this);
@@ -92,7 +92,7 @@ function create() {
             if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
                 des(this.minnow);
             }
-            if (this.minnow.y < 510) {
+            if (this.minnow.y < 491) {
                 this.minnow.y += 10;
             }
         }, this);
@@ -102,7 +102,7 @@ function create() {
             if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
                 des(this.minnow);
             }
-            if (this.minnow.x < 1210) {
+            if (this.minnow.x < 1199) {
                 this.minnow.x += 10;
             }
         }, this);
