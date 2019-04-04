@@ -38,5 +38,6 @@
     <orderEntry type="library" name="Maven: org.scalafx:scalafx_2.12:11-R16" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.jasmine:jasmine-event-api:1.5.2" level="project" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="jasmine" level="application" />
   </component>
 </module>
