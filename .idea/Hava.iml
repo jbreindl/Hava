@@ -4,6 +4,12 @@
     <facet type="Python" name="Python">
       <configuration sdkName="" />
     </facet>
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="3" platform="JVM 1.6">
+        <compilerSettings />
+        <compilerArguments />
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -30,5 +36,7 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.8" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8" level="project" />
     <orderEntry type="library" name="Maven: org.scalafx:scalafx_2.12:11-R16" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.jasmine:jasmine-event-api:1.5.2" level="project" />
+    <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
   </component>
 </module>

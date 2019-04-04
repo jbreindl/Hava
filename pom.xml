@@ -28,6 +28,15 @@
             <version>11-R16</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.ow2.jasmine/jasmine-event-api -->
+        <dependency>
+            <groupId>org.ow2.jasmine</groupId>
+            <artifactId>jasmine-event-api</artifactId>
+            <version>1.5.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+
 
     </dependencies>
 </project>
