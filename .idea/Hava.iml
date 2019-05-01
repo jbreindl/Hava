@@ -21,6 +21,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="scala-sdk-2.12.8" level="application" />
+    <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="jasmine" level="application" />
     <orderEntry type="library" name="Maven: org.scalatest:scalatest_2.12:3.0.5" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.12.4" level="project" />
     <orderEntry type="library" name="Maven: org.scalactic:scalactic_2.12:3.0.5" level="project" />
@@ -37,7 +39,5 @@
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8" level="project" />
     <orderEntry type="library" name="Maven: org.scalafx:scalafx_2.12:11-R16" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.jasmine:jasmine-event-api:1.5.2" level="project" />
-    <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
-    <orderEntry type="library" name="jasmine" level="application" />
   </component>
 </module>
