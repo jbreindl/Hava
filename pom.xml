@@ -5,20 +5,11 @@
     <url>http://maven.apache.org</url>
     <version>0.0.1</version>
     <dependencies>
-        <!--
-        https://mvnrepository.com/artifact/org.scalatest/scalatest
-       -->
+        <!-- https://mvnrepository.com/artifact/org.scalatest/scalatest -->
         <dependency>
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_2.12</artifactId>
             <version>3.0.5</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.typesafe.play/play-json -->
-        <dependency>
-            <groupId>com.typesafe.play</groupId>
-            <artifactId>play-json_2.12</artifactId>
-            <version>2.7.1</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.scalafx/scalafx -->
@@ -28,15 +19,39 @@
             <version>11-R16</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.ow2.jasmine/jasmine-event-api -->
+        <!-- https://mvnrepository.com/artifact/com.typesafe.play/play-json -->
         <dependency>
-            <groupId>org.ow2.jasmine</groupId>
-            <artifactId>jasmine-event-api</artifactId>
-            <version>1.5.2</version>
-            <scope>provided</scope>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play-json_2.12</artifactId>
+            <version>2.7.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.scalaj/scalaj-http -->
+        <dependency>
+            <groupId>org.scalaj</groupId>
+            <artifactId>scalaj-http_2.12</artifactId>
+            <version>2.4.1</version>
+        </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor -->
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_2.12</artifactId>
+            <version>2.5.22</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.15</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.socket</groupId>
+            <artifactId>socket.io-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
     </dependencies>
 </project>
