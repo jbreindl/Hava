@@ -1,7 +1,6 @@
 package Model
 
 import java.net.InetSocketAddress
-
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import akka.io.{IO, Tcp}
 import akka.util.ByteString
@@ -83,6 +82,3 @@ class TCPSocketServer(gameActor: ActorRef) extends Actor {
       actorSystem.scheduler.schedule(32.milliseconds, 32.milliseconds, server, SendGameState)
     }
   }
-
-
-}
