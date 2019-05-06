@@ -19,7 +19,7 @@ function eat(aMinnow) {
 // boundary 236 to 545
 const config = {
     type: Phaser.AUTO,
-    width: 1200,
+    width: 800,
     height: 500,
     scene: {
         preload: preload,
@@ -32,7 +32,7 @@ let game = new Phaser.Game(config);
 function preload() {
     this.load.image("Sprite0", "shark.png");
     this.load.image("Sprite1", "minnow.png");
-    this.load.image('bg', 'back.png');
+    this.load.image('bg', 'back1.png');
 }
 
 function create() {
@@ -81,43 +81,43 @@ function create() {
 
 //    second sprite
 
-    this.input.keyboard.on('keydown_LEFT', function event() {
-        // hit detection event handler
-        if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-            des(this.minnow);
-        }
-        if (this.minnow.x > 20) {
-            this.minnow.x -= 10;
-        }
-    }, this);
-
-    this.input.keyboard.on('keydown_DOWN', function event() {
-        // hit detection event handler
-        if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-            des(this.minnow);
-        }
-        if (this.minnow.y < 491) {
-            this.minnow.y += 10;
-        }
-    }, this);
-
-    this.input.keyboard.on('keydown_RIGHT', function event() {
-        // hit detection event handler
-        if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-            des(this.minnow);
-        }
-        if (this.minnow.x < 1199) {
-            this.minnow.x += 10;
-        }
-    }, this);
-
-    this.input.keyboard.on('keydown_UP', function event() {
-        // hit detection event handler
-        if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
-            des(this.minnow);
-        }
-        if (this.minnow.y > 20) {
-            this.minnow.y -= 10;
-        }
-    }, this);
+    // this.input.keyboard.on('keydown_LEFT', function event() {
+    //     // hit detection event handler
+    //     if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
+    //         des(this.minnow);
+    //     }
+    //     if (this.minnow.x > 20) {
+    //         this.minnow.x -= 10;
+    //     }
+    // }, this);
+    //
+    // this.input.keyboard.on('keydown_DOWN', function event() {
+    //     // hit detection event handler
+    //     if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
+    //         des(this.minnow);
+    //     }
+    //     if (this.minnow.y < 491) {
+    //         this.minnow.y += 10;
+    //     }
+    // }, this);
+    //
+    // this.input.keyboard.on('keydown_RIGHT', function event() {
+    //     // hit detection event handler
+    //     if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
+    //         des(this.minnow);
+    //     }
+    //     if (this.minnow.x < 799) {
+    //         this.minnow.x += 10;
+    //     }
+    // }, this);
+    //
+    // this.input.keyboard.on('keydown_UP', function event() {
+    //     // hit detection event handler
+    //     if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
+    //         des(this.minnow);
+    //     }
+    //     if (this.minnow.y > 20) {
+    //         this.minnow.y -= 10;
+    //     }
+    // }, this);
 }
