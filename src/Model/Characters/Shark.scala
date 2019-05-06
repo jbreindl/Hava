@@ -1,10 +1,9 @@
 package Model.Characters
 
-import Model.physics.{PhysicsVector, sharkBoundary}
+import Model.physics.{GameObject, PhysicalObject, PhysicsVector, sharkBoundary}
 
-class Shark (inputLocation: PhysicsVector, inputVelocity: PhysicsVector) extends fish(inputLocation, inputVelocity) {
-  override def fishType = "shark"
+class Shark (inputLocation: PhysicsVector, inputVelocity: PhysicsVector) extends PhysicalObject(inputLocation, inputVelocity) {
 
-  override val speed: Double = 5
-  override val fishSize: Double = 0.5
+  val speed: Double = 5
+  val fishSize: Double = 0.5
 }
