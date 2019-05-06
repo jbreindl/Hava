@@ -16,6 +16,7 @@ class Game {
   var playground = new Playground
   var walls: List[Wall] = List()
   var lastUpdateTime: Long = System.nanoTime()
+  var minnowBoundary: List[Boundary] = List()
 
   def loadLevel(newLevel: Playground): Unit = {
     world.boundaries = List()
@@ -42,11 +43,22 @@ class Game {
   def updateMinnows(minnows: ListBuffer[Minnow], dt: Double): Unit ={
     val time: Long = System.nanoTime()
     val dt = (time - this.lastUpdateTime) / 1000000000.0
-    for(minnow <- minnows){
+
+    for(minnow <- minnows) {
       val potentialLocation: PhysicsVector = minnow.computePotentialLocation(dt)
 
-
       var collisionDetected: Boolean = false
+      for (bound <- minnowBoundary) {
+        if (minnow.isAllowed(potentialLocation,bound)){
+          collisionDetected = true
+          minnow.stop()
+        }
+      }
+
+      if(!collisionDetected){
+        minnow.inputLocation.x = potentialLocation.x
+        minnow.inputLocation.y = potentialLocation.y
+      }
     }
   }
 
@@ -77,6 +89,11 @@ class Game {
     world.boundaries ::= new Boundary(ur, lr)
     world.boundaries ::= new Boundary(lr, ll)
     world.boundaries ::= new Boundary(ll, ul)
+
+    minnowBoundary ::= new Boundary(ul, ur)
+    minnowBoundary ::= new Boundary(ur, lr)
+    minnowBoundary ::= new Boundary(lr, ll)
+    minnowBoundary ::= new Boundary(ll, ul)
   }
 
   //if a minnow is close enough to be eaten it becomes a shark
@@ -114,6 +131,7 @@ class Game {
         "v_x" -> Json.toJson(v.inputVelocity.x),
         "v_y" -> Json.toJson(v.inputVelocity.y),
         "id" -> Json.toJson(k))) })),
+
       "shark"-> Json.toJson(this.sharkList.map({case (k, v) => Json.toJson(Map(
         "x" -> Json.toJson(v.inputLocation.x),
         "y" -> Json.toJson(v.inputLocation.y),
