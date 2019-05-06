@@ -11,7 +11,6 @@ class TCPSocketServer(gameActor: ActorRef) extends Actor {
     import Tcp._
     import context.system
 
-
     IO(Tcp) ! Bind(self, new InetSocketAddress("localhost", 8000))
 
     var webServers: Set[ActorRef] = Set()
@@ -64,8 +63,6 @@ class TCPSocketServer(gameActor: ActorRef) extends Actor {
 
   }
 
-
-//bitchhhhhhhhhhhhhhh
   object TCPSocketServer {
 
     def main(args: Array[String]): Unit = {
