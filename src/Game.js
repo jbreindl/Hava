@@ -56,7 +56,7 @@ function create() {
         if (distance(this.minnow.x, this.shark.x, this.minnow.y, this.shark.y) < 50) {
             des(this.minnow);
         }
-        if (this.shark.y < 491) {
+        if (this.shark.y < 471) {
             this.shark.y += 8;
         }
     }, this);
