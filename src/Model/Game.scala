@@ -2,6 +2,7 @@ package Model
 
 import Model.Characters.{Minnow, Shark}
 import Model.physics.{Boundary, GridLocation, Physics, PhysicsVector, Playground, Wall, World}
+import play.api.libs.json.{JsValue, Json}
 
 import scala.collection.mutable.ListBuffer
 
@@ -30,6 +31,18 @@ class Game {
     walls = new Wall(x, y) :: walls
   }
 
+
+  //this isn't done yet
+  def updateMinnows(minnows: ListBuffer[Minnow], dt: Double): Unit ={
+    val time: Long = System.nanoTime()
+    val dt = (time - this.lastUpdateTime) / 1000000000.0
+    for(minnow <- minnows){
+      val potentialLocation: PhysicsVector = minnow.computePotentialLocation(dt)
+
+
+      var collisionDetected: Boolean = false
+    }
+  }
 
   def update(): Unit = {
     val time: Long = System.nanoTime()
@@ -81,4 +94,22 @@ class Game {
       }
     }
   }
+
+/*
+  def gameState(): String = {
+    val gameState: Map[String, JsValue] = Map(
+      "gridSize" -> Json.toJson(Map("x" -> playground.gridWidth, "y" -> playground.gridHeight)),
+      "minnowStart" -> Json.toJson(Map("x" -> minnowPoint.x, "y" -> minnowPoint.y)),
+      "sharkStart" -> Json.toJson("y"-> sharkPoint.x, "y"-> minnowPoint.y),
+      "walls" -> Json.toJson(this.walls.map({ w => Json.toJson(Map("x" -> w.x, "y" -> w.y)) })),
+      "minnows" -> Json.toJson(this.minnowList.map({case (k, v) => Json.toJson(Map(
+        "x" -> Json.toJson(),
+        "y" -> Json.toJson(v.location.y),
+        "v_x" -> Json.toJson(v.velocity.x),
+        "v_y" -> Json.toJson(v.velocity.y),
+        "id" -> Json.toJson(k))) }))
+    )
+
+    Json.stringify(Json.toJson(gameState))
+  }*/
 }
