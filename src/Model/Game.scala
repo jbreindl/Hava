@@ -1,6 +1,6 @@
 package Model
 
-import Model.Characters.{Minnow, Shark, fish}
+import Model.Characters.{Minnow, Shark}
 import Model.physics.{Boundary, GridLocation, PhysicsVector, Playground, World}
 
 import scala.collection.mutable.ListBuffer
@@ -20,15 +20,8 @@ class Game {
   def MinnowSpawn(): PhysicsVector ={
     new PhysicsVector(minnowPoint.x, minnowPoint.y)
   }
+//this comment is because I forgot to push
 
-  def addFish(Fish: fish): Unit={
-    if (Fish.fishType == "shark"){
-      sharkList :+= new Shark(sharkSpawn(), new PhysicsVector(0,0))
-    }
-    if(Fish.fishType == "minnow"){
-      minnowList :+= new Minnow(MinnowSpawn(), new PhysicsVector(0,0))
-    }
-  }
 
   def blockTile(x: Int, y: Int, width: Int = 1, height: Int = 1): Unit = {
     val ul = new PhysicsVector(x, y)
