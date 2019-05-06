@@ -10,8 +10,12 @@ function des(spr) {
     spr.destroy();
 }
 
+let minnow = new Phaser.Class({initialize: Function()});
+let shark = new Phaser.Class({initialize: Function()});
 
-
+function eat(aMinnow) {
+    aMinnow = new shark;
+}
 // boundary 236 to 545
 const config = {
     type: Phaser.AUTO,
