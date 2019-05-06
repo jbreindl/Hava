@@ -13,29 +13,24 @@ function parseGameState(event) {
 
     drawGameBoard(gameState['gridSize']);
 
-    placeSquare(gameState['start']['x'], gameState['start']['y'], '#00ff00');
+    placeSquare(gameState['minnowStart']['x'], gameState['minnowStart']['y'], '#00ff00');
+    placeSquare(gameState['sharkStart']['x'], gameState['sharkStart']['y'], '#00ff00');
 
-    const health = gameState['baseHealth'];
-    const maxHealth = gameState['maxBaseHealth'];
-    const percentHealth = health / maxHealth;
-    const color = rgb(percentHealth * 255, percentHealth * 255, 0);
-
-    placeSquare(gameState['base']['x'], gameState['base']['y'], color);
 
     for (let tower of gameState['towers']) {
         drawTower(tower['x'], tower['y']);
     }
 
-    for (let player of gameState['players']) {
-        placeCircle(player['x'], player['y'], player['id'] === socket.id ? '#ffff00' : '#56bcff', 2.0);
+    for (let minnow of gameState['minnows']) {
+        placeCircle(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#ffff00' : '#56bcff', 2.0);
+    }
+
+    for (let shark of gameState['sharks']) {
+        placeCircle(shark['x'], shark['y'], shark['id'] === socket.id ? '#ffff00' : '#56bcff', 2.0);
     }
 
     for (let wall of gameState['walls']) {
         placeSquare(wall['x'], wall['y'], 'grey');
-    }
-
-    for (let projectile of gameState['projectiles']) {
-        placeCircle(projectile['x'], projectile['y'], 'red', 1.0);
     }
 
 }
@@ -107,25 +102,3 @@ function yComp(degrees){
     return Math.sin(Math.PI*degrees/180.0)
 }
 
-function drawTower(x, y) {
-    const size = 3.0;
-
-    const scaledSize = size / 10.0 * tileSize;
-    const centerX = (x + 0.5) * tileSize;
-    const centerY = (y + 0.5) * tileSize;
-
-    context.fillStyle = '#760672';
-    context.strokeStyle = 'black';
-
-    context.beginPath();
-    context.moveTo(centerX + scaledSize , centerY);
-    for(let i = 0; i<=7; i++){
-        const degrees = i*60.0;
-        context.lineTo(centerX + xComp(degrees) * scaledSize, centerY + yComp(degrees) * scaledSize);
-    }
-
-    context.lineWidth = 5;
-    context.stroke();
-    context.lineWidth = 1;
-    context.fill()
-}
