@@ -32,6 +32,14 @@ class Game {
     walls = new Wall(x, y) :: walls
   }
 
+  def tag(minnow:Minnow): Unit={
+    val minnowID = minnow.id
+    minnowList -= minnowID
+
+    val newshark = new Shark(minnow.inputLocation, new PhysicsVector(0, 0))
+    sharkList += (minnowID -> newshark)
+  }
+
   def addShark(id: String): Unit ={
     sharkList += (id-> new Shark(sharkSpawn(), new PhysicsVector(0,0)))
   }
@@ -101,7 +109,7 @@ class Game {
     for(shark <- sharkList.values){
       for (minnow <- minnowList.values){
         if(shark.location.distance2d(minnow.location) <= shark.fishSize) {
-          minnow.tag()
+          tag(minnow)
           minnowList -= minnow.id
           addShark(minnow.id)
         }
