@@ -31,6 +31,18 @@ class Game {
   }
 
 
+  //this isn't done yet
+  def updateMinnows(minnows: ListBuffer[Minnow], dt: Double): Unit ={
+    val time: Long = System.nanoTime()
+    val dt = (time - this.lastUpdateTime) / 1000000000.0
+    for(minnow <- minnows){
+      val potentialLocation: PhysicsVector = minnow.computePotentialLocation(dt)
+
+
+      var collisionDetected: Boolean = false
+    }
+  }
+
   def update(): Unit = {
     val time: Long = System.nanoTime()
     val dt = (time - this.lastUpdateTime) / 1000000000.0
