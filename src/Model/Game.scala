@@ -9,8 +9,8 @@ import scala.collection.mutable.ListBuffer
 class Game {
 
   var world: World = new World(10)
-  var sharkList: ListBuffer[Shark] = ListBuffer()
-  var minnowList: ListBuffer[Minnow] = ListBuffer()
+  var sharkList: Map[String, Shark] = Map()
+  var minnowList: Map[String, Minnow] = Map()
   val sharkPoint: GridLocation = new GridLocation(15, 5)
   val minnowPoint: GridLocation = new GridLocation(0, 5)
   var playground = new Playground
@@ -31,6 +31,12 @@ class Game {
     walls = new Wall(x, y) :: walls
   }
 
+  def addShark(id: String): Unit ={
+    sharkList += (id-> new Shark(sharkSpawn(), new PhysicsVector(0,0)))
+  }
+  def addMinnow(id: String):Unit={
+  minnowList += (id-> new Minnow(MinnowSpawn(), new PhysicsVector(0,0)))
+}
 
   //this isn't done yet
   def updateMinnows(minnows: ListBuffer[Minnow], dt: Double): Unit ={
@@ -75,19 +81,19 @@ class Game {
 
   //if a minnow is close enough to be eaten it becomes a shark
   def checkForTags(): Unit ={
-    for(shark <- sharkList){
-      for (minnow <- minnowList){
+    for(shark <- sharkList.values){
+      for (minnow <- minnowList.values){
         if(shark.location.distance2d(minnow.location) <= shark.fishSize) {
           minnow.tag()
-          minnowList -= minnow
-          sharkList :+= minnow
+          minnowList -= minnow.id
+          addShark(minnow.id)
         }
       }
     }
   }
   //respawn mechanism for minnows
   def checkForFinish(): Unit ={
-    for(minnow <- minnowList){
+    for(minnow <- minnowList.values){
       if (minnow.location.x > 29) {
         minnow.location.x = minnowPoint.x
         minnow.location.y = minnowPoint.y
@@ -95,7 +101,7 @@ class Game {
     }
   }
 
-/*
+
   def gameState(): String = {
     val gameState: Map[String, JsValue] = Map(
       "gridSize" -> Json.toJson(Map("x" -> playground.gridWidth, "y" -> playground.gridHeight)),
@@ -103,13 +109,19 @@ class Game {
       "sharkStart" -> Json.toJson("y"-> sharkPoint.x, "y"-> minnowPoint.y),
       "walls" -> Json.toJson(this.walls.map({ w => Json.toJson(Map("x" -> w.x, "y" -> w.y)) })),
       "minnows" -> Json.toJson(this.minnowList.map({case (k, v) => Json.toJson(Map(
-        "x" -> Json.toJson(),
-        "y" -> Json.toJson(v.location.y),
-        "v_x" -> Json.toJson(v.velocity.x),
-        "v_y" -> Json.toJson(v.velocity.y),
+        "x" -> Json.toJson(v.inputLocation.x),
+        "y" -> Json.toJson(v.inputLocation.y),
+        "v_x" -> Json.toJson(v.inputVelocity.x),
+        "v_y" -> Json.toJson(v.inputVelocity.y),
+        "id" -> Json.toJson(k))) })),
+      "shark"-> Json.toJson(this.sharkList.map({case (k, v) => Json.toJson(Map(
+        "x" -> Json.toJson(v.inputLocation.x),
+        "y" -> Json.toJson(v.inputLocation.y),
+        "v_x" -> Json.toJson(v.inputVelocity.x),
+        "v_y" -> Json.toJson(v.inputVelocity.y),
         "id" -> Json.toJson(k))) }))
     )
 
     Json.stringify(Json.toJson(gameState))
-  }*/
+  }
 }

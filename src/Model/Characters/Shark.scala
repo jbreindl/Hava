@@ -2,7 +2,9 @@ package Model.Characters
 
 import Model.physics.{GameObject, PhysicalObject, PhysicsVector}
 
-class Shark (inputLocation: PhysicsVector, inputVelocity: PhysicsVector) extends PhysicalObject(inputLocation, inputVelocity) {
+class Shark (var inputLocation: PhysicsVector, var inputVelocity: PhysicsVector) extends PhysicalObject(inputLocation, inputVelocity) {
+
+  var id: String = _
 
   def move(direction: PhysicsVector){
     val normalDirection = direction.normal2d()

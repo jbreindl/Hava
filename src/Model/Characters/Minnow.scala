@@ -6,7 +6,13 @@ import Model.physics.{Boundary, PhysicsVector}
 class Minnow(var inputLocation: PhysicsVector, var inputVelocity: PhysicsVector) {
   val speed: Double = 3
   val size: Double = 0.3
-  def tag(): Unit = this = new Shark(this.inputLocation, new PhysicsVector(0,0))
+  var id: String = _
+
+  def tag(): Unit={
+    val ret = new Shark(this.inputLocation, new PhysicsVector(0,0))
+    ret.id = this.id
+    this= ret
+  }
 
   var location: PhysicsVector = inputLocation
 
