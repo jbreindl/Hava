@@ -126,12 +126,16 @@ class Game {
     }
   }
 
+  def dummyThick(input: Double): Map[Double, Double] = {
+    return Map(1.0 -> 5.0)
+  }
+
 
   def gameState(): String = {
     val gameState: Map[String, JsValue] = Map(
       "gridSize" -> Json.toJson(Map("x" -> playground.gridWidth, "y" -> playground.gridHeight)),
       "minnowStart" -> Json.toJson(Map("x" -> minnowPoint.x, "y" -> minnowPoint.y)),
-      "sharkStart" -> Json.toJson("y"-> sharkPoint.x, "y"-> minnowPoint.y),
+      "sharkStart" -> Json.toJson("y" -> sharkPoint.x, "y" -> minnowPoint.y),
       "walls" -> Json.toJson(this.walls.map({ w => Json.toJson(Map("x" -> w.x, "y" -> w.y)) })),
       "minnows" -> Json.toJson(this.minnowList.map({case (k, v) => Json.toJson(Map(
         "x" -> Json.toJson(v.inputLocation.x),
