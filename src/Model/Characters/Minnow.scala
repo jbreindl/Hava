@@ -8,11 +8,6 @@ class Minnow(var inputLocation: PhysicsVector, var inputVelocity: PhysicsVector)
   val size: Double = 0.3
   var id: String = _
 
-  def tag(): Unit={
-    val ret = new Shark(this.inputLocation, new PhysicsVector(0,0))
-    ret.id = this.id
-    this= ret
-  }
 
   var location: PhysicsVector = inputLocation
 
