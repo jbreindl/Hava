@@ -1,5 +1,5 @@
 package Model
 
-class HavaActor {
+class GameActor {
 
 }
