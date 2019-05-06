@@ -1,14 +1,11 @@
 package Model.Characters
-import states.playerStates._
 
-class Minnow extends fish {
-  override var fishType: playerState = new Alive
+import Model.physics.PhysicsVector
 
-  def die(): Unit = {
-    this.fishType = new Dead
-  }
+class Minnow(inputLocation: PhysicsVector, inputVelocity: PhysicsVector) {
+  val speed: Double = 3
+  val size: Double = 0.3
+  def tag(): Unit = this = new Shark(this.inputLocation, new PhysicsVector(0,0))
 
-  def safe(): Unit = {
-    this.fishType = new outOfPlay
-  }
+  var location: PhysicsVector = inputLocation
 }
