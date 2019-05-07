@@ -53,14 +53,21 @@ class Game {
 
   def tag(minnow:Minnow): Unit={
     val minnowID = minnow.id
-    removePlayer(minnowID)
+    minnowList -= minnowID
     addShark(minnowID)
   }
 
   def addShark(id: String): Unit ={
-    val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
-    sharkList += (id-> shark)
     if(!(playerMap contains id)) {
+      val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
+      sharkList += (id-> shark)
+      playerMap += (id -> shark)
+      world.objects :+= shark
+    }
+      //pushing is difficult
+    else{
+      playerMap -= id
+      val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
       playerMap += (id -> shark)
       world.objects :+= shark
     }
@@ -74,7 +81,7 @@ class Game {
   }
 
   def changeClass(id: String): Unit={
-    minnowList-= id
+    minnowList -= id
     addShark(id)
   }
 

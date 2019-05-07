@@ -41,6 +41,7 @@ function cleanInt(input) {
 function rgb(r, g, b) {
     return "#" + cleanInt(r) + cleanInt(g) + cleanInt(b);
 }
+//fix
 
 
 function drawGameBoard(gridSize) {
