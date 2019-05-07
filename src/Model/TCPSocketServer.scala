@@ -45,7 +45,7 @@ class TCPSocketServer(gameActor: ActorRef) extends Actor {
     }
 
 
-    def handleMessageFromWebServer(messageString:String):Unit = {
+    def handleMessageFromWebServer(messageString: String): Unit = {
       val message: JsValue = Json.parse(messageString)
       val username = (message \ "username").as[String]
       val messageType = (message \ "action").as[String]

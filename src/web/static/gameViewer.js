@@ -17,16 +17,13 @@ function parseGameState(event) {
     placeSquare(gameState['sharkStart']['x'], gameState['sharkStart']['y'], '#00ff00');
 
 
-    for (let tower of gameState['towers']) {
-        drawTower(tower['x'], tower['y']);
-    }
 
     for (let minnow of gameState['minnows']) {
         placeCircle(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#ffff00' : '#56bcff', 2.0);
     }
 
     for (let shark of gameState['sharks']) {
-        placeCircle(shark['x'], shark['y'], shark['id'] === socket.id ? '#ffff00' : '#56bcff', 2.0);
+        placeSquare(shark['x'], shark['y'], shark['id'] === socket.id ? '#ffff00' : '#56bcff', 2.0);
     }
 
     for (let wall of gameState['walls']) {

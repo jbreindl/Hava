@@ -6,6 +6,9 @@ import physics.{PhysicsVector, Playground}
 class GameActor extends Actor{
   var players: Map[String, ActorRef] = Map()
   var towers: List[ActorRef] = List()
+  var playerNumber = 0
+  var sharkNum = 0
+  var minnowNum = 0
 
   val game: Game = new Game()
   var levelNumber = 0
@@ -17,13 +20,42 @@ class GameActor extends Actor{
 
   override def receive: Receive = {
     case message: AddPlayer =>
-      // if shark number zero, then shark
-      // else minnow
-    case message: RemovePlayer => game.removePlayer(message.username)
-    case message: MovePlayer => game.players(message.username).move(new PhysicsVector(message.x, message.y))
-    case message: StopPlayer => game.players(message.username).stop()
-    case UpdateGame => game.update()
-    case SendGameState => sender() ! GameState(game.gameState())
+      if (playerNumber == 0 & sharkNum == 0){
+        game.addShark(message.username)
+        playerNumber += 1
+        sharkNum += 1
+      }
+      else {
+        game.addMinnow(message.username)
+        playerNumber += 1
+        minnowNum += 1
+      }
+    case message: RemovePlayer =>
+      if (game.playerMap(message.username).tag == "shark") {
+        game.removePlayer(message.username)
+        playerNumber -= 1
+        sharkNum -= 1
+
+      }
+      else {
+        game.removePlayer(message.username)
+        playerNumber -= 1
+        minnowNum -= 1
+      }
+    case message: MovePlayer =>
+      game.playerMap(message.username).move(new PhysicsVector(message.x, message.y))
+
+    case message: StopPlayer =>
+      game.playerMap(message.username).stop()
+
+    case UpdateGame =>
+      game.update()
+      if (playerNumber >= 2 & minnowNum == 0){
+        loadLevel(levelNumber)
+      }
+
+    case SendGameState =>
+      sender() ! GameState(game.gameState())
   }
 
 }

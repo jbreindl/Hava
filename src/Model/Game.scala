@@ -1,10 +1,9 @@
 package Model
 
-import Model.Characters.{Minnow, Shark}
-import Model.physics.{Boundary, GridLocation, Physics, PhysicsVector, Playground, Wall, World}
+import Model.Characters.{Minnow, Shark, fish}
+import Model.physics.{Boundary, GridLocation, Physics, PhysicsVector, Playground, Wall, World, sharkBoundary, sharkWall}
 import play.api.libs.json.{JsValue, Json}
 
-import scala.collection.mutable.ListBuffer
 
 class Game {
 
@@ -16,7 +15,8 @@ class Game {
   var playground = new Playground
   var walls: List[Wall] = List()
   var lastUpdateTime: Long = System.nanoTime()
-  var minnowBoundary: List[Boundary] = List()
+  var playerMap: Map[String, fish] = Map()
+  var sharkWalls: List[sharkWall] = List()
 
   def loadLevel(newLevel: Playground): Unit = {
     world.boundaries = List()
@@ -24,12 +24,31 @@ class Game {
     walls = List()
     blockTile(0, 0, playground.gridWidth, playground.gridHeight)
 
-    playground.walls.foreach(wall => placeWall(wall.x, wall.y))
+    blockTile(0, 0, playground.gridWidth, playground.gridHeight)
+
+    playground.sharkWalls.foreach(sharkYeet=> placeSharkWall(sharkYeet.x, sharkYeet.y))
   }
 
   def placeWall(x: Int, y: Int): Unit = {
     blockTile(x, y)
     walls = new Wall(x, y) :: walls
+  }
+
+  def placeSharkWall(x: Int, y:Int): Unit ={
+    blockShark(x, y)
+   sharkWalls :+= new sharkWall(x, y)
+  }
+
+  def blockShark(x: Int, y: Int, width: Int = 1, height: Int = 1): Unit ={
+    val ul = new PhysicsVector(x, y)
+    val ur = new PhysicsVector(x + width, y)
+    val lr = new PhysicsVector(x + width, y + height)
+    val ll = new PhysicsVector(x, y + height)
+
+    world.sharkBoundaries :+= new sharkBoundary(ul, ur)
+    world.sharkBoundaries :+= new sharkBoundary(ur, lr)
+    world.sharkBoundaries :+= new sharkBoundary(lr, ll)
+    world.sharkBoundaries:+= new sharkBoundary(ll, ul)
   }
 
   def tag(minnow:Minnow): Unit={
@@ -41,37 +60,29 @@ class Game {
   }
 
   def addShark(id: String): Unit ={
-    sharkList += (id-> new Shark(sharkSpawn(), new PhysicsVector(0,0)))
+    val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
+    sharkList += (id-> shark)
+    playerMap += (id -> shark)
+    world.objects :+= shark
   }
+
   def addMinnow(id: String):Unit={
-  minnowList += (id-> new Minnow(MinnowSpawn(), new PhysicsVector(0,0)))
-}
+    val minnow = new Minnow(MinnowSpawn(), new PhysicsVector(0,0))
+    minnowList += (id-> minnow)
+    playerMap += (id -> minnow)
+    world.objects :+= minnow
+  }
 
-  def updateMinnows(minnows: ListBuffer[Minnow], dt: Double): Unit ={
-    val time: Long = System.nanoTime()
-    val dt = (time - this.lastUpdateTime) / 1000000000.0
-
-    for(minnow <- minnows) {
-      val potentialLocation: PhysicsVector = minnow.computePotentialLocation(dt)
-
-      var collisionDetected: Boolean = false
-      for (bound <- minnowBoundary) {
-        if (minnow.isAllowed(potentialLocation,bound)){
-          collisionDetected = true
-          minnow.stop()
-        }
-      }
-
-      if(!collisionDetected){
-        minnow.inputLocation.x = potentialLocation.x
-        minnow.inputLocation.y = potentialLocation.y
-      }
+  def removePlayer(id: String): Unit ={
+    playerMap -= id
+    if (sharkList.contains(id)){
+      sharkList -= id
+    }
+    else{
+      minnowList -= id
     }
   }
 
-  def removePlayer(message: String): Unit ={
-    //remove player from game
-  }
 
   def update(): Unit = {
     val time: Long = System.nanoTime()
@@ -100,11 +111,6 @@ class Game {
     world.boundaries ::= new Boundary(ur, lr)
     world.boundaries ::= new Boundary(lr, ll)
     world.boundaries ::= new Boundary(ll, ul)
-
-    minnowBoundary ::= new Boundary(ul, ur)
-    minnowBoundary ::= new Boundary(ur, lr)
-    minnowBoundary ::= new Boundary(lr, ll)
-    minnowBoundary ::= new Boundary(ll, ul)
   }
 
   //if a minnow is close enough to be eaten it becomes a shark
@@ -119,6 +125,7 @@ class Game {
       }
     }
   }
+
   //respawn mechanism for minnows
   def checkForFinish(): Unit ={
     for(minnow <- minnowList.values){
@@ -135,23 +142,30 @@ class Game {
     val gameState: Map[String, JsValue] = Map(
       "gridSize" -> Json.toJson(Map("x" -> playground.gridWidth, "y" -> playground.gridHeight)),
       "minnowStart" -> Json.toJson(Map("x" -> minnowPoint.x, "y" -> minnowPoint.y)),
-      "sharkStart" -> Json.toJson("y" -> sharkPoint.x, "y" -> minnowPoint.y),
+      "sharkStart" -> Json.toJson(Map("x" -> sharkPoint.x, "y" -> minnowPoint.y)),
       "walls" -> Json.toJson(this.walls.map({ w => Json.toJson(Map("x" -> w.x, "y" -> w.y)) })),
+      "players" -> Json.toJson(this.playerMap.map({ case (k, v) => Json.toJson(Map(
+        "x" -> Json.toJson(v.location.x),
+        "y" -> Json.toJson(v.location.y),
+        "v_x" -> Json.toJson(v.velocity.x),
+        "v_y" -> Json.toJson(v.velocity.y),
+        "id" -> Json.toJson(k))) })),
+
       "minnows" -> Json.toJson(this.minnowList.map({case (k, v) => Json.toJson(Map(
-        "x" -> Json.toJson(v.inputLocation.x),
-        "y" -> Json.toJson(v.inputLocation.y),
-        "v_x" -> Json.toJson(v.inputVelocity.x),
-        "v_y" -> Json.toJson(v.inputVelocity.y),
+        "x" -> Json.toJson(v.location.x),
+        "y" -> Json.toJson(v.location.y),
+        "v_x" -> Json.toJson(v.velocity.x),
+        "v_y" -> Json.toJson(v.velocity.y),
         "id" -> Json.toJson(k))) })),
 
       "shark"-> Json.toJson(this.sharkList.map({case (k, v) => Json.toJson(Map(
-        "x" -> Json.toJson(v.inputLocation.x),
-        "y" -> Json.toJson(v.inputLocation.y),
-        "v_x" -> Json.toJson(v.inputVelocity.x),
-        "v_y" -> Json.toJson(v.inputVelocity.y),
+        "x" -> Json.toJson(v.location.x),
+        "y" -> Json.toJson(v.location.y),
+        "v_x" -> Json.toJson(v.velocity.x),
+        "v_y" -> Json.toJson(v.velocity.y),
         "id" -> Json.toJson(k))) }))
     )
-
     Json.stringify(Json.toJson(gameState))
   }
+
 }
