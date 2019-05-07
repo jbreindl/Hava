@@ -1,11 +1,9 @@
 var socket = io.connect({transports: ['websocket']});
 socket.on('gameState', parseGameState);
-
-const tileSize = 30;
-
-var canvas = document.getElementById("canvas");
+var canvas = document.getElementById("PlayGround");
 var context = canvas.getContext("2d");
 context.globalCompositeOperation = 'source-over';
+const sizeOfGridSquares = 30;
 
 function parseGameState(event) {
     // console.log(event);
@@ -19,6 +17,8 @@ function parseGameState(event) {
 
 
     for (let minnow of gameState['minnows']) {
+        //this makes the minnow image
+        placeMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff')
         placeCircle(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff', 2.0);
     }
 
@@ -32,40 +32,28 @@ function parseGameState(event) {
 
 }
 
-function cleanInt(input) {
-    const value = Math.round(input);
-    const asString = value.toString(16);
-    return value > 15 ? asString : "0" + asString;
-}
-
-function rgb(r, g, b) {
-    return "#" + cleanInt(r) + cleanInt(g) + cleanInt(b);
-}
-//fix
-
-
 function drawGameBoard(gridSize) {
 
     const gridWidth = gridSize['x'];
     const gridHeight = gridSize['y'];
 
-    context.clearRect(0, 0, gridWidth * tileSize, gridHeight * tileSize);
+    context.clearRect(0, 0, gridWidth * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
 
-    canvas.setAttribute("width", gridWidth * tileSize);
-    canvas.setAttribute("height", gridHeight * tileSize);
+    canvas.setAttribute("width", gridWidth * sizeOfGridSquares);
+    canvas.setAttribute("height", gridHeight * sizeOfGridSquares);
 
     context.strokeStyle = '#ff5500';
     context.fillStyle = '#0099ff'
     for (let j = 0; j <= gridWidth; j++) {
         context.beginPath();
-        context.moveTo(j * tileSize, 0);
-        context.lineTo(j * tileSize, gridHeight * tileSize);
+        context.moveTo(j * sizeOfGridSquares, 0);
+        context.lineTo(j * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
         context.stroke();
     }
     for (let k = 0; k <= gridHeight; k++) {
         context.beginPath();
-        context.moveTo(0, k * tileSize);
-        context.lineTo(gridWidth * tileSize, k * tileSize);
+        context.moveTo(0, k * sizeOfGridSquares);
+        context.lineTo(gridWidth * sizeOfGridSquares, k * sizeOfGridSquares);
         context.stroke();
     }
 
@@ -74,18 +62,18 @@ function drawGameBoard(gridSize) {
 
 function placeSquare(x, y, color) {
     context.fillStyle = color;
-    context.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+    context.fillRect(x * sizeOfGridSquares, y * sizeOfGridSquares, sizeOfGridSquares, sizeOfGridSquares);
     context.strokeStyle = 'black';
-    context.strokeRect(x * tileSize, y * tileSize, tileSize, tileSize);
+    context.strokeRect(x * sizeOfGridSquares, y * sizeOfGridSquares, sizeOfGridSquares, sizeOfGridSquares);
 }
 
 
 function placeCircle(x, y, color, size) {
     context.fillStyle = color;
     context.beginPath();
-    context.arc(x * tileSize,
-        y * tileSize,
-        size / 10.0 * tileSize,
+    context.arc(x * sizeOfGridSquares,
+        y * sizeOfGridSquares,
+        size / 10.0 * sizeOfGridSquares,
         0,
         2 * Math.PI);
     context.fill();
