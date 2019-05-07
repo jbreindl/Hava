@@ -22,7 +22,6 @@ class Game {
     world.boundaries = List()
     playground = newLevel
     walls = List()
-    blockTile(0, 0, playground.gridWidth, playground.gridHeight)
 
     blockTile(0, 0, playground.gridWidth, playground.gridHeight)
 
