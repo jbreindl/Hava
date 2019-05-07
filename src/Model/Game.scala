@@ -1,7 +1,7 @@
 package Model
 
 import Model.Characters.{Minnow, Shark, fish}
-import Model.physics.{Boundary, GridLocation, Physics, PhysicsVector, Playground, Wall, World}
+import Model.physics.{Boundary, GridLocation, Physics, PhysicsVector, Playground, Wall, World, sharkWall}
 import play.api.libs.json.{JsValue, Json}
 
 import scala.collection.mutable.ListBuffer
@@ -17,6 +17,7 @@ class Game {
   var walls: List[Wall] = List()
   var lastUpdateTime: Long = System.nanoTime()
   var playerMap: Map[String, fish] = Map()
+  var sharkWalls: List[sharkWall] = List()
 
   def loadLevel(newLevel: Playground): Unit = {
     world.boundaries = List()
@@ -30,6 +31,23 @@ class Game {
   def placeWall(x: Int, y: Int): Unit = {
     blockTile(x, y)
     walls = new Wall(x, y) :: walls
+  }
+
+  def placeSharkWall(x: Int, y:Int): Unit ={
+    blockShark(x, y)
+   sharkWalls :+= new sharkWall(x, y)
+  }
+
+  def blockShark(x: Int, y: Int, width: Int = 1, height: Int = 1): Unit ={
+    val ul = new PhysicsVector(x, y)
+    val ur = new PhysicsVector(x + width, y)
+    val lr = new PhysicsVector(x + width, y + height)
+    val ll = new PhysicsVector(x, y + height)
+
+    world.sharkBoundaries ::= new Boundary(ul, ur)
+    world.sharkBoundaries ::= new Boundary(ur, lr)
+    world.sharkBoundaries ::= new Boundary(lr, ll)
+    world.sharkBoundaries::= new Boundary(ll, ul)
   }
 
   def tag(minnow:Minnow): Unit={
