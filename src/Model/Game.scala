@@ -113,18 +113,25 @@ class Game {
       "minnowStart" -> Json.toJson(Map("x" -> minnowPoint.x, "y" -> minnowPoint.y)),
       "sharkStart" -> Json.toJson("y" -> sharkPoint.x, "y" -> minnowPoint.y),
       "walls" -> Json.toJson(this.walls.map({ w => Json.toJson(Map("x" -> w.x, "y" -> w.y)) })),
+      "players" -> Json.toJson(this.playerMap.map({ case (k, v) => Json.toJson(Map(
+        "x" -> Json.toJson(v.location.x),
+        "y" -> Json.toJson(v.location.y),
+        "v_x" -> Json.toJson(v.velocity.x),
+        "v_y" -> Json.toJson(v.velocity.y),
+        "id" -> Json.toJson(k))) })),
+
       "minnows" -> Json.toJson(this.minnowList.map({case (k, v) => Json.toJson(Map(
         "x" -> Json.toJson(v.location.x),
         "y" -> Json.toJson(v.location.y),
-        "v_x" -> Json.toJson(v.location.x),
-        "v_y" -> Json.toJson(v.location.y),
+        "v_x" -> Json.toJson(v.velocity.x),
+        "v_y" -> Json.toJson(v.velocity.y),
         "id" -> Json.toJson(k))) })),
 
       "shark"-> Json.toJson(this.sharkList.map({case (k, v) => Json.toJson(Map(
         "x" -> Json.toJson(v.location.x),
         "y" -> Json.toJson(v.location.y),
-        "v_x" -> Json.toJson(v.location.x),
-        "v_y" -> Json.toJson(v.location.y),
+        "v_x" -> Json.toJson(v.velocity.x),
+        "v_y" -> Json.toJson(v.velocity.y),
         "id" -> Json.toJson(k))) }))
     )
 
