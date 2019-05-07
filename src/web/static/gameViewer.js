@@ -19,6 +19,7 @@ function parseGameState(event) {
 
 
     for (let minnow of gameState['minnows']) {
+        //this makes the minnow image
         placeMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff')
         placeCircle(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff', 2.0);
     }
