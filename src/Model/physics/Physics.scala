@@ -82,7 +82,7 @@ object Physics {
 
 
   def updateWorld(world: World, deltaTime: Double): Unit = {
-
+    println("")
     for (obj <- world.objects) {
       // update velocity
       updateVelocity(obj, world, deltaTime)
@@ -97,15 +97,24 @@ object Physics {
           collisionDetected = true
           obj.collide()
         }
-        else if(obj.tag=="shark"){
-          for (sharkWall <- world.sharkBoundaries){
-            if (detectCollision(obj, potentialLocation, sharkWall)){
-             collisionDetected = true
-              obj.collide()
-            }
+
+      }
+      for (sharkWall <- world.sharkBoundaries){
+        if(obj.tag=="shark"){
+          if (detectCollision(obj, potentialLocation, sharkWall)){
+            collisionDetected = true
+            obj.collide()
           }
         }
       }
+//      if(obj.tag=="shark"){
+//        for (sharkWall <- world.sharkBoundaries){
+//          if (detectCollision(obj, potentialLocation, sharkWall)){
+//            collisionDetected = true
+//            obj.collide()
+//          }
+//        }
+//      }
 
       obj.location.z = potentialLocation.z
       if (!collisionDetected) {
