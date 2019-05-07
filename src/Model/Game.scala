@@ -157,7 +157,7 @@ class Game {
         "v_y" -> Json.toJson(v.velocity.y),
         "id" -> Json.toJson(k))) })),
 
-      "shark"-> Json.toJson(this.sharkList.map({case (k, v) => Json.toJson(Map(
+      "sharks"-> Json.toJson(this.sharkList.map({case (k, v) => Json.toJson(Map(
         "x" -> Json.toJson(v.location.x),
         "y" -> Json.toJson(v.location.y),
         "v_x" -> Json.toJson(v.velocity.x),
