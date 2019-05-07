@@ -22,10 +22,11 @@ class Game {
     world.boundaries = List()
     playground = newLevel
     walls = List()
-
+    sharkWalls = List()
     blockTile(0, 0, playground.gridWidth, playground.gridHeight)
 
-    playground.sharkWalls.foreach(sharkYeet=> placeSharkWall(sharkYeet.x, sharkYeet.y))
+    sharkWalls = playground.yeetWalls
+    this.sharkWalls.foreach(sharkYeet=> placeSharkWall(sharkYeet.x, sharkYeet.y))
   }
 
   def placeWall(x: Int, y: Int): Unit = {
@@ -35,7 +36,7 @@ class Game {
 
   def placeSharkWall(x: Int, y:Int): Unit ={
     blockShark(x, y)
-   sharkWalls :+= new sharkWall(x, y)
+    this.sharkWalls :+= new sharkWall(x, y)
   }
 
   def blockShark(x: Int, y: Int, width: Int = 1, height: Int = 1): Unit ={
