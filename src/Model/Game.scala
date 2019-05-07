@@ -64,6 +64,7 @@ class Game {
       playerMap += (id -> shark)
       world.objects :+= shark
     }
+      //pushing is difficult
     else{
       playerMap -= id
       val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
