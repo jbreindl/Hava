@@ -90,7 +90,7 @@ class Game {
       minnowList -= id
       playerMap -= id
     }
-  }
+  }//rejected push
 
 
   def update(): Unit = {
