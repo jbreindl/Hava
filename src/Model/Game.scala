@@ -72,7 +72,17 @@ class Game {
     minnowList += (id-> minnow)
     playerMap += (id -> minnow)
     world.objects :+= minnow
-}
+  }
+
+  def removePlayer(id: String): Unit ={
+    playerMap -= id
+    if (sharkList.contains(id)){
+      sharkList -= id
+    }
+    else{
+      minnowList -= id
+    }
+  }
 
 
   def update(): Unit = {
