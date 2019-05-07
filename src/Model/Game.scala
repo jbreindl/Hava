@@ -96,7 +96,7 @@ class Game {
     new PhysicsVector(sharkPoint.x, sharkPoint.y)
   }
   def MinnowSpawn(): PhysicsVector ={
-    new PhysicsVector(minnowPoint.x, minnowPoint.y)
+    new PhysicsVector(minnowPoint.x + 0.5, minnowPoint.y + 0.5)
   }
 
   //takes a wall and makes a physics boundary
