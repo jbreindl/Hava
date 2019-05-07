@@ -47,7 +47,6 @@ class Game {
   minnowList += (id-> new Minnow(MinnowSpawn(), new PhysicsVector(0,0)))
 }
 
-  //this isn't done yet
   def updateMinnows(minnows: ListBuffer[Minnow], dt: Double): Unit ={
     val time: Long = System.nanoTime()
     val dt = (time - this.lastUpdateTime) / 1000000000.0
@@ -126,9 +125,6 @@ class Game {
     }
   }
 
-  def dummyThick(input: Double): Map[Double, Double] = {
-    return Map(1.0 -> 5.0)
-  }
 
 
   def gameState(): String = {
