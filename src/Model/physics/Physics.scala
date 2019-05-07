@@ -82,7 +82,6 @@ object Physics {
 
 
   def updateWorld(world: World, deltaTime: Double): Unit = {
-    println("")
     for (obj <- world.objects) {
       // update velocity
       updateVelocity(obj, world, deltaTime)
