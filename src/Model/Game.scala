@@ -52,10 +52,8 @@ class Game {
 
   def tag(minnow:Minnow): Unit={
     val minnowID = minnow.id
-    minnowList -= minnowID
-
-    val newshark = new Shark(minnow.inputLocation, new PhysicsVector(0, 0))
-    sharkList += (minnowID -> newshark)
+    removePlayer(minnowID)
+    addShark(minnowID)
   }
 
   def addShark(id: String): Unit ={
@@ -73,9 +71,10 @@ class Game {
   }
 
   def removePlayer(id: String): Unit ={
-    playerMap -= id
     if (sharkList.contains(id)){
       sharkList -= id
+      playerMap -= id
+
     }
     else{
       minnowList -= id
@@ -118,8 +117,6 @@ class Game {
       for (minnow <- minnowList.values){
         if(shark.location.distance2d(minnow.location) <= shark.fishSize) {
           tag(minnow)
-          minnowList -= minnow.id
-          addShark(minnow.id)
         }
       }
     }
@@ -129,13 +126,13 @@ class Game {
   def checkForFinish(): Unit ={
     for(minnow <- minnowList.values){
       if (minnow.location.x > 29) {
-        minnow.location.x = minnowPoint.x
-        minnow.location.y = minnowPoint.y
+        minnow.location.x = minnowPoint.x +0.5
+        minnow.location.y = minnowPoint.y +0.5
       }
     }
   }
 
-
+//I forgot to push
 
   def gameState(): String = {
     val gameState: Map[String, JsValue] = Map(
