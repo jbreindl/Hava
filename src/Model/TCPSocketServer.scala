@@ -77,5 +77,6 @@ class TCPSocketServer(gameActor: ActorRef) extends Actor {
 
       actorSystem.scheduler.schedule(16.milliseconds, 32.milliseconds, gameActor, UpdateGame)
       actorSystem.scheduler.schedule(32.milliseconds, 32.milliseconds, server, SendGameState)
+      actorSystem.scheduler.schedule(5.seconds, 1.seconds, gameActor, resetGame)
     }
   }

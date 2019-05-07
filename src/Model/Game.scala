@@ -56,6 +56,12 @@ class Game {
     addShark(minnowID)
   }
 
+  def reverseTag(shark: Shark): Unit = {
+    val sharkID = shark.id
+    removePlayer(sharkID)
+    addMinnow(sharkID)
+  }
+
   def addShark(id: String): Unit ={
     if(!(playerMap contains id)) {
       val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
@@ -72,11 +78,23 @@ class Game {
   }
 
   def addMinnow(id: String):Unit={
-    val minnow = new Minnow(MinnowSpawn(), new PhysicsVector(0,0))
-    minnow.id = id
-    minnowList += (id-> minnow)
-    playerMap += (id -> minnow)
-    world.objects :+= minnow
+    if(!(playerMap contains id)) {
+      val minnow = new Minnow(MinnowSpawn(), new PhysicsVector(0,0))
+      minnow.id = id
+      minnowList += (id-> minnow)
+      playerMap += (id -> minnow)
+      world.objects :+= minnow
+    }
+    //pushing is difficult
+    else{
+      removePlayer(id)
+      addMinnow(id)
+    }
+//    val minnow = new Minnow(MinnowSpawn(), new PhysicsVector(0,0))
+//    minnow.id = id
+//    minnowList += (id-> minnow)
+//    playerMap += (id -> minnow)
+//    world.objects :+= minnow
   }
 
   def removePlayer(id: String): Unit ={
@@ -90,7 +108,22 @@ class Game {
       minnowList -= id
       playerMap -= id
     }
-  }//rejected push
+  }
+
+  def resetplayers(id: String): Unit = {
+    var random = scala.util.Random.nextInt(1)
+    if (random == 1) {
+      if (playerMap.size == 0 & sharkList.size == 0) {
+        addShark(id)
+      }
+      else {
+        addMinnow(id)
+      }
+    }
+    else{
+        resetplayers(id)
+      }
+  }
 
 
   def update(): Unit = {
@@ -146,7 +179,7 @@ class Game {
   }
   def checkForBound(): Unit={
     for (shark <- sharkList.values){
-      if(shark.location.x < 1){
+      if(shark.location.x < 3){
         shark.location = sharkSpawn()
       }
     }
