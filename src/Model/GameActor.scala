@@ -25,32 +25,38 @@ class GameActor extends Actor{
         game.addShark(message.username)
         playerNumber += 1
         sharkNum += 1
-        print(playerNumber)
-        print(sharkNum)
+        println("playerNumber")
+        println(playerNumber)
+        println("sharkNumber")
+        println(sharkNum)
       }
 
       else {
         game.addMinnow(message.username)
         playerNumber += 1
         minnowNum += 1
-        print(playerNumber)
-        print(sharkNum)
+        println("playerNumber")
+        println(playerNumber)
+        println("minnowNumber")
+        println(minnowNum)
       }
     case message: RemovePlayer =>
       if (game.playerMap(message.username).tag == "shark") {
         game.removePlayer(message.username)
         playerNumber -= 1
         sharkNum -= 1
-        print(playerNumber)
-        print(sharkNum)
+        println("playerNumber")
+        println(playerNumber)
+        println(sharkNum)
 
       }
       else {
         game.removePlayer(message.username)
         playerNumber -= 1
         minnowNum -= 1
+        println("playerNumber")
         print(playerNumber)
-        print(sharkNum)
+        print(minnowNum)
       }
     case message: MovePlayer =>
       game.playerMap(message.username).move(new PhysicsVector(message.x, message.y))
@@ -58,14 +64,11 @@ class GameActor extends Actor{
     case message: StopPlayer =>
       game.playerMap(message.username).stop()
 
-    case message: changeClass =>
-      game.checkForTags()
-
     case UpdateGame =>
       game.update()
-      if (playerNumber >= 2 & minnowNum == 0){
-        loadLevel(levelNumber)
-      }
+//      if (playerNumber >= 2 & minnowNum == 0){
+//        loadLevel(levelNumber)
+//      }
 
     case SendGameState =>
       sender() ! GameState(game.gameState())

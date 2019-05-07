@@ -54,8 +54,7 @@ class Game {
     println("**")
     println(playerMap)
     val minnowID = minnow.id
-    minnowList -= minnowID
-    minnow.destroy()
+    removePlayer(minnowID)
     addShark(minnowID)
   }
 
@@ -88,7 +87,6 @@ class Game {
       sharkList -= id
       playerMap -= id
     }
-
     else{
       minnowList(id).destroy()
       minnowList -= id
