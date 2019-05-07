@@ -4,7 +4,6 @@ import Model.Characters.{Minnow, Shark, fish}
 import Model.physics.{Boundary, GridLocation, Physics, PhysicsVector, Playground, Wall, World, sharkBoundary, sharkWall}
 import play.api.libs.json.{JsValue, Json}
 
-
 class Game {
 
   var world: World = new World(10)
@@ -52,8 +51,11 @@ class Game {
   }
 
   def tag(minnow:Minnow): Unit={
+    println("**")
+    println(playerMap)
     val minnowID = minnow.id
     minnowList -= minnowID
+    minnow.destroy()
     addShark(minnowID)
   }
 
@@ -66,39 +68,30 @@ class Game {
     }
       //pushing is difficult
     else{
-      playerMap -= id
-      val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
-      playerMap += (id -> shark)
-      world.objects :+= shark
+      removePlayer(id)
+      addShark(id)
     }
   }
 
   def addMinnow(id: String):Unit={
     val minnow = new Minnow(MinnowSpawn(), new PhysicsVector(0,0))
+    minnow.id = id
     minnowList += (id-> minnow)
     playerMap += (id -> minnow)
     world.objects :+= minnow
-  }
-
-  def changeClass(id: String): Unit={
-    minnowList -= id
-    addShark(id)
   }
 
   def removePlayer(id: String): Unit ={
     if (sharkList.contains(id)){
       sharkList(id).destroy()
       sharkList -= id
-      playerMap(id).destroy()
       playerMap -= id
-
     }
+
     else{
       minnowList(id).destroy()
       minnowList -= id
-      playerMap(id).destroy()
       playerMap -= id
-
     }
   }
 
@@ -115,6 +108,7 @@ class Game {
   def sharkSpawn(): PhysicsVector ={
     new PhysicsVector(sharkPoint.x, sharkPoint.y)
   }
+
   def MinnowSpawn(): PhysicsVector ={
     new PhysicsVector(minnowPoint.x +0.5, minnowPoint.y+0.5 )
   }

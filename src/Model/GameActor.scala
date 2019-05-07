@@ -28,6 +28,7 @@ class GameActor extends Actor{
         print(playerNumber)
         print(sharkNum)
       }
+
       else {
         game.addMinnow(message.username)
         playerNumber += 1
