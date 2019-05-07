@@ -26,7 +26,7 @@ function parseGameState(event) {
         placeSquare(shark['x'], shark['y'], shark['id'] === socket.id ? '#ffff00' : '#56bcff', 2.0);
     }
 
-    for (let wall of gameState['walls']) {
+    for (let wall of gameState['sharkWalls']) {
         placeSquare(wall['x'], wall['y'], 'grey');
     }
 
