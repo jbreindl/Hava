@@ -41,6 +41,7 @@ function cleanInt(input) {
 function rgb(r, g, b) {
     return "#" + cleanInt(r) + cleanInt(g) + cleanInt(b);
 }
+//fix
 
 
 function drawGameBoard(gridSize) {
@@ -53,7 +54,7 @@ function drawGameBoard(gridSize) {
     canvas.setAttribute("width", gridWidth * tileSize);
     canvas.setAttribute("height", gridHeight * tileSize);
 
-    context.strokeStyle = '#bbbbbb';
+    context.strokeStyle = '#000000';
     for (let j = 0; j <= gridWidth; j++) {
         context.beginPath();
         context.moveTo(j * tileSize, 0);

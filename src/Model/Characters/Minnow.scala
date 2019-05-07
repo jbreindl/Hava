@@ -7,5 +7,4 @@ class Minnow(var inputLocation: PhysicsVector, var inputVelocity: PhysicsVector)
   val speed: Double = 3
   val size: Double = 0.3
   override val tag = "minnow"
-
 }
