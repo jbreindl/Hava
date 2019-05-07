@@ -60,8 +60,10 @@ class Game {
   def addShark(id: String): Unit ={
     val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
     sharkList += (id-> shark)
-    playerMap += (id -> shark)
-    world.objects :+= shark
+    if(!(playerMap contains id)) {
+      playerMap += (id -> shark)
+      world.objects :+= shark
+    }
   }
 
   def addMinnow(id: String):Unit={
@@ -71,18 +73,23 @@ class Game {
     world.objects :+= minnow
   }
 
+  def changeClass(id: String): Unit={
+    minnowList-= id
+    addShark(id)
+  }
+
   def removePlayer(id: String): Unit ={
     if (sharkList.contains(id)){
       sharkList(id).destroy()
       sharkList -= id
-      playerMap(id).destroy
+      playerMap(id).destroy()
       playerMap -= id
 
     }
     else{
       minnowList(id).destroy()
       minnowList -= id
-      playerMap(id).destroy
+      playerMap(id).destroy()
       playerMap -= id
 
     }
