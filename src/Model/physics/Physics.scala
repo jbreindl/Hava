@@ -98,22 +98,14 @@ object Physics {
         }
 
       }
-      for (sharkWall <- world.sharkBoundaries){
-        if(obj.tag=="shark"){
+      if(obj.tag=="shark"){
+        for (sharkWall <- world.sharkBoundaries){
           if (detectCollision(obj, potentialLocation, sharkWall)){
             collisionDetected = true
             obj.collide()
           }
         }
       }
-//      if(obj.tag=="shark"){
-//        for (sharkWall <- world.sharkBoundaries){
-//          if (detectCollision(obj, potentialLocation, sharkWall)){
-//            collisionDetected = true
-//            obj.collide()
-//          }
-//        }
-//      }
 
       obj.location.z = potentialLocation.z
       if (!collisionDetected) {
