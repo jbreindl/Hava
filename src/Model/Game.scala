@@ -126,8 +126,8 @@ class Game {
   def checkForFinish(): Unit ={
     for(minnow <- minnowList.values){
       if (minnow.location.x > 29) {
-        minnow.location.x = minnowPoint.x +0.5
-        minnow.location.y = minnowPoint.y +0.5
+        minnow.location.x = minnowPoint.x + 0.5
+        minnow.location.y = minnowPoint.y + 0.5
       }
     }
   }
