@@ -17,6 +17,8 @@ function parseGameState(event) {
 
 
     for (let minnow of gameState['minnows']) {
+        //this makes the minnow image
+        placeMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff')
         placeCircle(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff', 2.0);
     }
 
@@ -77,6 +79,12 @@ function placeCircle(x, y, color, size) {
     context.fill();
     context.strokeStyle = 'black';
     context.stroke();
+}
+
+function placeMinnow(x, y, color){
+    var img = new Image()
+    img.src = "logo.png"
+    context.drawImage(x, y)
 }
 
 function xComp(degrees){
