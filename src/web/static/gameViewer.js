@@ -43,18 +43,20 @@ function drawGameBoard(gridSize) {
     canvas.setAttribute("height", gridHeight * sizeOfGridSquares);
 
     context.strokeStyle = '#ff5500';
-    context.fillStyle = '#0099ff'
+    context.fillStyle = '#0099ff';
     for (let j = 0; j <= gridWidth; j++) {
         context.beginPath();
         context.moveTo(j * sizeOfGridSquares, 0);
         context.lineTo(j * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
         context.stroke();
+        context.fill();
     }
     for (let k = 0; k <= gridHeight; k++) {
         context.beginPath();
         context.moveTo(0, k * sizeOfGridSquares);
         context.lineTo(gridWidth * sizeOfGridSquares, k * sizeOfGridSquares);
         context.stroke();
+        context.fill();
     }
 
 }
