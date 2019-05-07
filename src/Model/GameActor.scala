@@ -25,23 +25,31 @@ class GameActor extends Actor{
         game.addShark(message.username)
         playerNumber += 1
         sharkNum += 1
+        print(playerNumber)
+        print(sharkNum)
       }
       else {
         game.addMinnow(message.username)
         playerNumber += 1
         minnowNum += 1
+        print(playerNumber)
+        print(sharkNum)
       }
     case message: RemovePlayer =>
       if (game.playerMap(message.username).tag == "shark") {
         game.removePlayer(message.username)
         playerNumber -= 1
         sharkNum -= 1
+        print(playerNumber)
+        print(sharkNum)
 
       }
       else {
         game.removePlayer(message.username)
         playerNumber -= 1
         minnowNum -= 1
+        print(playerNumber)
+        print(sharkNum)
       }
     case message: MovePlayer =>
       game.playerMap(message.username).move(new PhysicsVector(message.x, message.y))
