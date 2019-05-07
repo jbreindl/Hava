@@ -1,10 +1,9 @@
 package Model
 
 import Model.Characters.{Minnow, Shark, fish}
-import Model.physics.{Boundary, GridLocation, Physics, PhysicsVector, Playground, Wall, World, sharkWall}
+import Model.physics.{Boundary, GridLocation, Physics, PhysicsVector, Playground, Wall, World, sharkBoundary, sharkWall}
 import play.api.libs.json.{JsValue, Json}
 
-import scala.collection.mutable.ListBuffer
 
 class Game {
 
@@ -46,10 +45,10 @@ class Game {
     val lr = new PhysicsVector(x + width, y + height)
     val ll = new PhysicsVector(x, y + height)
 
-    world.sharkBoundaries ::= new Boundary(ul, ur)
-    world.sharkBoundaries ::= new Boundary(ur, lr)
-    world.sharkBoundaries ::= new Boundary(lr, ll)
-    world.sharkBoundaries::= new Boundary(ll, ul)
+    world.sharkBoundaries :+= new sharkBoundary(ul, ur)
+    world.sharkBoundaries :+= new sharkBoundary(ur, lr)
+    world.sharkBoundaries :+= new sharkBoundary(lr, ll)
+    world.sharkBoundaries:+= new sharkBoundary(ll, ul)
   }
 
   def tag(minnow:Minnow): Unit={
@@ -166,9 +165,7 @@ class Game {
         "v_y" -> Json.toJson(v.velocity.y),
         "id" -> Json.toJson(k))) }))
     )
-
     Json.stringify(Json.toJson(gameState))
   }
 
-  //w
 }

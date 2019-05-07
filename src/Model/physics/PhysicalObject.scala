@@ -4,7 +4,7 @@ class PhysicalObject(var location: PhysicsVector, var velocity: PhysicsVector) e
 
   def onGround(): Unit = {}
   def collide(): Unit = {}
-  var tag: String = _
+  val tag: String = "po"
 
   override def toString = s"PhysicalObject($location, $velocity)"
 }
