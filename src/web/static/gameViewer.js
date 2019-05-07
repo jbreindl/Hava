@@ -13,19 +13,17 @@ function parseGameState(event) {
 
     drawGameBoard(gameState['gridSize']);
 
-    placeSquare(gameState['minnowStart']['x'], gameState['minnowStart']['y'], '#00ff00');
-    placeSquare(gameState['sharkStart']['x'], gameState['sharkStart']['y'], '#00ff00');
+    placeSquare(gameState['minnowStart']['x'], gameState['minnowStart']['y'], '#000000');
+    placeSquare(gameState['sharkStart']['x'], gameState['sharkStart']['y'], '#000000');
 
 
 
     for (let minnow of gameState['minnows']) {
-        //place minnow
-        placeMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#ffff00' : '#56bcff')
-        placeCircle(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#ffff00' : '#56bcff', 2.0);
+        placeCircle(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff', 2.0);
     }
 
     for (let shark of gameState['sharks']) {
-        placeSquare(shark['x'], shark['y'], shark['id'] === socket.id ? '#ffff00' : '#56bcff', 2.0);
+        placeSquare(shark['x'], shark['y'], shark['id'] === socket.id ? '#0000ff' : '#ff0000', 2.0);
     }
 
     for (let wall of gameState['sharkWalls']) {
@@ -56,7 +54,8 @@ function drawGameBoard(gridSize) {
     canvas.setAttribute("width", gridWidth * tileSize);
     canvas.setAttribute("height", gridHeight * tileSize);
 
-    context.strokeStyle = '#000000';
+    context.strokeStyle = '#ff5500';
+    context.fillStyle = '#0099ff'
     for (let j = 0; j <= gridWidth; j++) {
         context.beginPath();
         context.moveTo(j * tileSize, 0);
@@ -92,13 +91,6 @@ function placeCircle(x, y, color, size) {
     context.fill();
     context.strokeStyle = 'black';
     context.stroke();
-}
-
-//sprite for minnow
-function placeMinnow(x, y, color){
-    var img = new Image()
-    img.src = "logo.png"
-    context.drawImage(img, x, y)
 }
 
 function xComp(degrees){

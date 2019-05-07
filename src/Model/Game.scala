@@ -23,9 +23,7 @@ class Game {
     walls = List()
     sharkWalls = List()
     blockTile(0, 0, playground.gridWidth, playground.gridHeight)
-
-    sharkWalls = playground.yeetWalls
-    this.sharkWalls.foreach(sharkYeet=> placeSharkWall(sharkYeet.x, sharkYeet.y))
+    playground.yeetWalls.foreach(sharkYeet => placeSharkWall(sharkYeet.x, sharkYeet.y))
   }
 
   def placeWall(x: Int, y: Int): Unit = {
@@ -35,7 +33,7 @@ class Game {
 
   def placeSharkWall(x: Int, y:Int): Unit ={
     blockShark(x, y)
-    this.sharkWalls :+= new sharkWall(x, y)
+    sharkWalls :+= new sharkWall(x,y)
   }
 
   def blockShark(x: Int, y: Int, width: Int = 1, height: Int = 1): Unit ={
@@ -44,10 +42,10 @@ class Game {
     val lr = new PhysicsVector(x + width, y + height)
     val ll = new PhysicsVector(x, y + height)
 
-    world.sharkBoundaries :+= new sharkBoundary(ul, ur)
-    world.sharkBoundaries :+= new sharkBoundary(ur, lr)
-    world.sharkBoundaries :+= new sharkBoundary(lr, ll)
-    world.sharkBoundaries:+= new sharkBoundary(ll, ul)
+    world.boundaries:+= new sharkBoundary(ul, ur)
+    world.boundaries :+= new sharkBoundary(ur, lr)
+    world.boundaries :+= new sharkBoundary(lr, ll)
+    world.boundaries:+= new sharkBoundary(ll, ul)
   }
 
   def tag(minnow:Minnow): Unit={
@@ -92,7 +90,7 @@ class Game {
       minnowList -= id
       playerMap -= id
     }
-  }
+  }//rejected push
 
 
   def update(): Unit = {
@@ -101,6 +99,7 @@ class Game {
     Physics.updateWorld(this.world, dt)
     checkForFinish()
     checkForTags()
+    checkForBound()
     this.lastUpdateTime = time
   }
 
@@ -145,7 +144,13 @@ class Game {
       }
     }
   }
-
+  def checkForBound(): Unit={
+    for (shark <- sharkList.values){
+      if(shark.location.x < 1){
+        shark.location = sharkSpawn()
+      }
+    }
+  }
 //I forgot to push
 
   def gameState(): String = {
