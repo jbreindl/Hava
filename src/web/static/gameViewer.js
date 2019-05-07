@@ -93,6 +93,12 @@ function placeCircle(x, y, color, size) {
     context.stroke();
 }
 
+function placeMinnow(x, y, color){
+    var img = new Image()
+    img.src = "logo.png"
+    context.drawImage(x, y)
+}
+
 function xComp(degrees){
     return Math.cos(Math.PI*degrees/180.0)
 }
