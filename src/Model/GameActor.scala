@@ -19,6 +19,7 @@ class GameActor extends Actor{
   }
 
   override def receive: Receive = {
+
     case message: AddPlayer =>
       if (playerNumber == 0 & sharkNum == 0){
         game.addShark(message.username)
@@ -48,6 +49,9 @@ class GameActor extends Actor{
     case message: StopPlayer =>
       game.playerMap(message.username).stop()
 
+    case message: changeClass =>
+      game.checkForTags()
+
     case UpdateGame =>
       game.update()
       if (playerNumber >= 2 & minnowNum == 0){
@@ -56,6 +60,7 @@ class GameActor extends Actor{
 
     case SendGameState =>
       sender() ! GameState(game.gameState())
+
   }
 
 }
