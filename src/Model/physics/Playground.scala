@@ -1,13 +1,14 @@
 package Model.physics
 
 class Playground {
-  var walls: List[Wall] = List()
+  var sharkWalls: List[sharkWall] = List()
   var gridWidth: Int = 30
   var gridHeight: Int = 10
 }
 
 object Playground {
-  var sharkWall = List (
+    new Playground{
+      sharkWalls = List (
     new sharkWall(0, 29),
     new sharkWall(1, 29),
     new sharkWall(2, 29),
@@ -32,4 +33,4 @@ object Playground {
     new sharkWall(9, 1),
     new sharkWall(10, 1)
   )
-}
+}}

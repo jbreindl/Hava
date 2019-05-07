@@ -1,5 +1,5 @@
 package Model.physics
 
-class sharkWall(x: Int, y: Int) {
+class sharkWall(val x: Int, val y: Int) {
 
 }

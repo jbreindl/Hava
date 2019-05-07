@@ -97,6 +97,14 @@ object Physics {
           collisionDetected = true
           obj.collide()
         }
+        if(obj.tag=="shark"){
+          for (sharkWall <- world.sharkBoundaries){
+            if (detectCollision(obj, potentialLocation, sharkWall)){
+             collisionDetected = true
+              obj.collide()
+            }
+          }
+        }
       }
 
       obj.location.z = potentialLocation.z

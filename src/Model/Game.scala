@@ -25,7 +25,9 @@ class Game {
     walls = List()
     blockTile(0, 0, playground.gridWidth, playground.gridHeight)
 
-    playground.walls.foreach(wall => placeWall(wall.x, wall.y))
+    blockTile(0, 0, playground.gridWidth, playground.gridHeight)
+
+    playground.sharkWalls.foreach(sharkYeet=> placeSharkWall(sharkYeet.x, sharkYeet.y))
   }
 
   def placeWall(x: Int, y: Int): Unit = {
