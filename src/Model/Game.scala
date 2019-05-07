@@ -64,12 +64,14 @@ class Game {
     val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
     sharkList += (id-> shark)
     playerMap += (id -> shark)
+    world.objects :+= shark
   }
 
   def addMinnow(id: String):Unit={
     val minnow = new Minnow(MinnowSpawn(), new PhysicsVector(0,0))
     minnowList += (id-> minnow)
     playerMap += (id -> minnow)
+    world.objects :+= minnow
 }
 
 
