@@ -73,12 +73,18 @@ class Game {
 
   def removePlayer(id: String): Unit ={
     if (sharkList.contains(id)){
+      sharkList(id).destroy()
       sharkList -= id
+      playerMap(id).destroy
       playerMap -= id
 
     }
     else{
+      minnowList(id).destroy()
       minnowList -= id
+      playerMap(id).destroy
+      playerMap -= id
+
     }
   }
 
