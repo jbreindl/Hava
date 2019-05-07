@@ -53,7 +53,7 @@ class Game {
 
   def tag(minnow:Minnow): Unit={
     val minnowID = minnow.id
-    removePlayer(minnowID)
+    minnowList -= minnowID
     addShark(minnowID)
   }
 
@@ -61,6 +61,11 @@ class Game {
     val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
     sharkList += (id-> shark)
     if(!(playerMap contains id)) {
+      playerMap += (id -> shark)
+      world.objects :+= shark
+    }
+    else{
+      playerMap -= id
       playerMap += (id -> shark)
       world.objects :+= shark
     }
@@ -74,7 +79,7 @@ class Game {
   }
 
   def changeClass(id: String): Unit={
-    minnowList-= id
+    minnowList -= id
     addShark(id)
   }
 
