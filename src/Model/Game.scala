@@ -69,6 +69,10 @@ class Game {
     }
   }
 
+  def removePlayer(message: String): Unit ={
+    //remove player from game
+  }
+
   def update(): Unit = {
     val time: Long = System.nanoTime()
     val dt = (time - this.lastUpdateTime) / 1000000000.0
