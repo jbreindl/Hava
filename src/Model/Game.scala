@@ -58,14 +58,15 @@ class Game {
   }
 
   def addShark(id: String): Unit ={
-    val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
-    sharkList += (id-> shark)
     if(!(playerMap contains id)) {
+      val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
+      sharkList += (id-> shark)
       playerMap += (id -> shark)
       world.objects :+= shark
     }
     else{
       playerMap -= id
+      val shark = new Shark(sharkSpawn(), new PhysicsVector(0,0))
       playerMap += (id -> shark)
       world.objects :+= shark
     }
