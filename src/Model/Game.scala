@@ -22,7 +22,6 @@ class Game {
     world.boundaries = List()
     playground = newLevel
     walls = List()
-    blockTile(0, 0, playground.gridWidth, playground.gridHeight)
 
     blockTile(0, 0, playground.gridWidth, playground.gridHeight)
 
@@ -143,7 +142,7 @@ class Game {
       "gridSize" -> Json.toJson(Map("x" -> playground.gridWidth, "y" -> playground.gridHeight)),
       "minnowStart" -> Json.toJson(Map("x" -> minnowPoint.x, "y" -> minnowPoint.y)),
       "sharkStart" -> Json.toJson(Map("x" -> sharkPoint.x, "y" -> minnowPoint.y)),
-      "walls" -> Json.toJson(this.walls.map({ w => Json.toJson(Map("x" -> w.x, "y" -> w.y)) })),
+      "sharkWalls" -> Json.toJson(this.sharkWalls.map({ w => Json.toJson(Map("x" -> w.x, "y" -> w.y)) })),
       "players" -> Json.toJson(this.playerMap.map({ case (k, v) => Json.toJson(Map(
         "x" -> Json.toJson(v.location.x),
         "y" -> Json.toJson(v.location.y),
