@@ -45,6 +45,9 @@ function drawGameBoard(gridSize) {
     context.fillStyle = '#66ffff';
     context.fillRect(0, 0, gridWidth * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
 
+    context.fillStyle = '#00ff7f';
+    context.fillRect(gridWidth * sizeOfGridSquares - sizeOfGridSquares, 0, gridWidth * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
+
     context.strokeStyle = '#000000';
     context.beginPath();
     context.moveTo(3 * sizeOfGridSquares, 0);
