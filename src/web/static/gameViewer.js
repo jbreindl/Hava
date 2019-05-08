@@ -6,24 +6,22 @@ context.globalCompositeOperation = 'source-over';
 const sizeOfGridSquares = 30;
 
 function parseGameState(event) {
-    // console.log(event);
     const gameState = JSON.parse(event);
 
     drawGameBoard(gameState['gridSize']);
-
-    addSpawn(gameState['minnowStart']['x'], gameState['minnowStart']['y'], '#757802');
-    addSpawn(gameState['sharkStart']['x'], gameState['sharkStart']['y'], '#757802');
+    addSpawn(gameState['minnowStart']['x'], gameState['minnowStart']['y'], '#000000');
+    addSpawn(gameState['sharkStart']['x'], gameState['sharkStart']['y'], '#000000');
 
 
 
     for (let minnow of gameState['minnows']) {
         //this makes the minnow image
         // placeMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff')
-        addMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#ff0c10' : '#ff00ff', 2.0);
+        addMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff', 2.0);
     }
 
     for (let shark of gameState['sharks']) {
-        addShark(shark['x'], shark['y'], shark['id'] === socket.id ? 'rgba(62,255,62,1)' : '#0000ff', 2.0);
+        addShark(shark['x'], shark['y'], shark['id'] === socket.id ? '#0000ff' : '#ff0000', 2.0);
     }
 
     for (let wall of gameState['sharkWalls']) {
@@ -45,13 +43,13 @@ function drawGameBoard(gridSize) {
     context.fillStyle = '#66ffff';
     context.fillRect(0, 0, gridWidth * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
 
-    context.fillStyle = '#ffe332';
+    context.fillStyle = '#00ff7f';
     context.fillRect(gridWidth * sizeOfGridSquares - sizeOfGridSquares, 0, gridWidth * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
 
     context.strokeStyle = '#000000';
     context.beginPath();
-    context.moveTo(3 * sizeOfGridSquares, 0);
-    context.lineTo(3 * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
+    context.moveTo(4 * sizeOfGridSquares, 0);
+    context.lineTo(4 * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
     context.stroke();
 }
 
