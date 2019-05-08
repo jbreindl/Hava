@@ -79,20 +79,11 @@ class GameActor extends Actor{
           holder :+= players
         }
         for (i <- 0 until holder.size){
-          val random = scala.util.Random.nextInt(4)
+          val random = scala.util.Random.nextInt(holder.size - 1)
           if (i != random){
             game.reverseTag(holder(i))
           }
         }
-//        for ((k,v) <- game.sharkList){
-//          game.removePlayer(game.playerMap(k).id)
-//          if (game.playerMap.size == 0 & game.sharkList.size == 0) {
-//            game.addShark(k)
-//          }
-//          else {
-//            game.addMinnow(k)
-//          }
-//        }
       }
 
 
