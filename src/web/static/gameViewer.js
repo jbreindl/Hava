@@ -16,7 +16,7 @@ function parseGameState(event) {
 
     for (let minnow of gameState['minnows']) {
         //this makes the minnow image
-        // placeMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff')
+        // placeMinnow(minnow['x']*30, minnow['y']*30, minnow['id'] === socket.id ? '#00ffff' : '#ff00ff')
         addMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff', 2.0);
     }
 
@@ -84,8 +84,8 @@ function addMinnow(x, y, color, size) {
 
 // function placeMinnow(x, y, color){
 //     var img = new Image()
-//     img.src = "logo.png"
-//     context.drawImage(x, y)
+//     img.src = "minnow.png"
+//     context.drawImage(img, x, y)
 // }
 
 
