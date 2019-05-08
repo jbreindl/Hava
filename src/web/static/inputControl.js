@@ -1,4 +1,4 @@
-var keyStates = {
+let keyStates = {
     "w": false,
     "a": false,
     "s": false,
