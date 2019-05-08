@@ -9,8 +9,8 @@ class Game {
   var world: World = new World(10)
   var sharkList: Map[String, Shark] = Map()
   var minnowList: Map[String, Minnow] = Map()
-  val sharkPoint: GridLocation = new GridLocation(15, 5)
-  val minnowPoint: GridLocation = new GridLocation(0, 5)
+  val sharkPoint: GridLocation = new GridLocation(15, 6)
+  val minnowPoint: GridLocation = new GridLocation(0, 6)
   var playground = new Playground
   var walls: List[Wall] = List()
   var lastUpdateTime: Long = System.nanoTime()
@@ -179,7 +179,7 @@ class Game {
   }
   def checkForBound(): Unit={
     for (shark <- sharkList.values){
-      if(shark.location.x < 3){
+      if(shark.location.x < 4){
         shark.location = sharkSpawn()
       }
     }

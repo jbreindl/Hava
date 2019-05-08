@@ -7,5 +7,5 @@ class Shark (var inputLocation: PhysicsVector, var inputVelocity: PhysicsVector)
   override val tag = "shark"
 
   val speed: Double = 5
-  val fishSize: Double = 0.5
+  val fishSize: Double = .6
 }

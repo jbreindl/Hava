@@ -3,7 +3,7 @@ package Model.physics
 class Playground {
   var yeetWalls: List[GridLocation] = List()
   var gridWidth: Int = 30
-  var gridHeight: Int = 10
+  var gridHeight: Int = 13
 }
 
 object Playground {
