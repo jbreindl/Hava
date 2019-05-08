@@ -1,7 +1,7 @@
-var socket = io.connect({transports: ['websocket']});
+let socket = io.connect({transports: ['websocket']});
 socket.on('gameState', parseGameState);
-var canvas = document.getElementById("PlayGround");
-var context = canvas.getContext("2d");
+let canvas = document.getElementById("PlayGround");
+let context = canvas.getContext("2d");
 context.globalCompositeOperation = 'source-over';
 const sizeOfGridSquares = 30;
 
@@ -80,11 +80,4 @@ function placeCircle(x, y, color, size) {
 //     context.drawImage(x, y)
 // }
 
-function xComp(degrees){
-    return Math.cos(Math.PI*degrees/180.0)
-}
-
-function yComp(degrees){
-    return Math.sin(Math.PI*degrees/180.0)
-}
 
