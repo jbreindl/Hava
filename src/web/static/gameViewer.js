@@ -11,23 +11,23 @@ function parseGameState(event) {
 
     drawGameBoard(gameState['gridSize']);
 
-    placeSquare(gameState['minnowStart']['x'], gameState['minnowStart']['y'], '#000000');
-    placeSquare(gameState['sharkStart']['x'], gameState['sharkStart']['y'], '#000000');
+    addSpawn(gameState['minnowStart']['x'], gameState['minnowStart']['y'], '#000000');
+    addSpawn(gameState['sharkStart']['x'], gameState['sharkStart']['y'], '#000000');
 
 
 
     for (let minnow of gameState['minnows']) {
         //this makes the minnow image
         // placeMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff')
-        placeCircle(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff', 2.0);
+        addMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff', 2.0);
     }
 
     for (let shark of gameState['sharks']) {
-        placeSquare(shark['x'], shark['y'], shark['id'] === socket.id ? '#0000ff' : '#ff0000', 2.0);
+        addShark(shark['x'], shark['y'], shark['id'] === socket.id ? '#0000ff' : '#ff0000', 2.0);
     }
 
     for (let wall of gameState['sharkWalls']) {
-        placeSquare(wall['x'], wall['y'], 'grey');
+        addShark(wall['x'], wall['y'], 'grey');
     }
 
 }
@@ -53,15 +53,22 @@ function drawGameBoard(gridSize) {
 }
 
 
-function placeSquare(x, y, color) {
+function addShark(x, y, color) {
     context.fillStyle = color;
     context.fillRect(x * sizeOfGridSquares, y * sizeOfGridSquares, sizeOfGridSquares, sizeOfGridSquares);
     context.strokeStyle = 'black';
     context.strokeRect(x * sizeOfGridSquares, y * sizeOfGridSquares, sizeOfGridSquares, sizeOfGridSquares);
 }
 
+function addSpawn(x, y) {
+    context.fillStyle = '#000000';
+    context.fillRect(x * sizeOfGridSquares, y * sizeOfGridSquares, sizeOfGridSquares, sizeOfGridSquares);
+    context.strokeStyle = 'black';
+    context.strokeRect(x * sizeOfGridSquares, y * sizeOfGridSquares, sizeOfGridSquares, sizeOfGridSquares);
+}
 
-function placeCircle(x, y, color, size) {
+
+function addMinnow(x, y, color, size) {
     context.fillStyle = color;
     context.beginPath();
     context.arc(x * sizeOfGridSquares,
