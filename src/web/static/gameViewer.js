@@ -6,11 +6,9 @@ context.globalCompositeOperation = 'source-over';
 const sizeOfGridSquares = 30;
 
 function parseGameState(event) {
-    // console.log(event);
     const gameState = JSON.parse(event);
 
     drawGameBoard(gameState['gridSize']);
-
     addSpawn(gameState['minnowStart']['x'], gameState['minnowStart']['y'], '#000000');
     addSpawn(gameState['sharkStart']['x'], gameState['sharkStart']['y'], '#000000');
 
@@ -50,8 +48,8 @@ function drawGameBoard(gridSize) {
 
     context.strokeStyle = '#000000';
     context.beginPath();
-    context.moveTo(3 * sizeOfGridSquares, 0);
-    context.lineTo(3 * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
+    context.moveTo(4 * sizeOfGridSquares, 0);
+    context.lineTo(4 * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
     context.stroke();
 }
 
