@@ -1,7 +1,7 @@
-var socket = io.connect({transports: ['websocket']});
+let socket = io.connect({transports: ['websocket']});
 socket.on('gameState', parseGameState);
-var canvas = document.getElementById("PlayGround");
-var context = canvas.getContext("2d");
+let canvas = document.getElementById("PlayGround");
+let context = canvas.getContext("2d");
 context.globalCompositeOperation = 'source-over';
 const sizeOfGridSquares = 30;
 
@@ -42,23 +42,14 @@ function drawGameBoard(gridSize) {
     canvas.setAttribute("width", gridWidth * sizeOfGridSquares);
     canvas.setAttribute("height", gridHeight * sizeOfGridSquares);
 
-    context.strokeStyle = '#ff5500';
-    context.fillStyle = '#0099ff';
-    for (let j = 0; j <= gridWidth; j++) {
-        context.beginPath();
-        context.moveTo(j * sizeOfGridSquares, 0);
-        context.lineTo(j * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
-        context.stroke();
-        context.fill();
-    }
-    for (let k = 0; k <= gridHeight; k++) {
-        context.beginPath();
-        context.moveTo(0, k * sizeOfGridSquares);
-        context.lineTo(gridWidth * sizeOfGridSquares, k * sizeOfGridSquares);
-        context.stroke();
-        context.fill();
-    }
+    context.fillStyle = '#66ffff';
+    context.fillRect(0, 0, gridWidth * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
 
+    context.strokeStyle = '#000000';
+    context.beginPath();
+    context.moveTo(3 * sizeOfGridSquares, 0);
+    context.lineTo(3 * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
+    context.stroke();
 }
 
 
@@ -89,11 +80,4 @@ function placeCircle(x, y, color, size) {
 //     context.drawImage(x, y)
 // }
 
-function xComp(degrees){
-    return Math.cos(Math.PI*degrees/180.0)
-}
-
-function yComp(degrees){
-    return Math.sin(Math.PI*degrees/180.0)
-}
 
