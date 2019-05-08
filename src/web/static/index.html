@@ -1,12 +1,18 @@
 
 <html lang="en">
 <head>
-    <div class="banner">
-        <h1> Hava: Nice Day </h1>
+
+    <h1 align = "center"> Hava: Nice Day </h1>
+    <div class = "description">
+        <h1>
+            Description: The game starts with a shark in the center and minnows at the left side.
+            The minnows want to get to the goal on the right before the shark eats them and turns them into more sharks.
+            The game is over when there are no more minnows.
+        </h1>
     </div>
 
     <meta charset="UTF-8">
-    <title>Sharks and Minnows!</title>
+    <title>Sharks and Minnows</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 </head>
 <body>
@@ -16,5 +22,17 @@
 <script src="gameViewer.js"></script>
 <script src="inputControl.js"></script>
 
+
 </body>
+
+<style>
+    canvas {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+</style>
+
 </html>
