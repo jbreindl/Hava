@@ -17,11 +17,11 @@ function parseGameState(event) {
     for (let minnow of gameState['minnows']) {
         //this makes the minnow image
         // placeMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff')
-        addMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#00ffff' : '#ff00ff', 2.0);
+        addMinnow(minnow['x'], minnow['y'], minnow['id'] === socket.id ? '#ff1215' : '#ff00ff', 2.0);
     }
 
     for (let shark of gameState['sharks']) {
-        addShark(shark['x'], shark['y'], shark['id'] === socket.id ? '#0000ff' : '#ff0000', 2.0);
+        addShark(shark['x'], shark['y'], shark['id'] === socket.id ? '#0000ff' : '#4dff24', 2.0);
     }
 
     for (let wall of gameState['sharkWalls']) {
