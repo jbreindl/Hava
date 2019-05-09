@@ -47,7 +47,7 @@ class GameActor extends Actor{
       else {
         game.removePlayer(message.username)
         println("playerNumber")
-        print(playerNumber)
+        println(playerNumber)
         println("minnowNumber")
         println(minnowNum)
       }
@@ -73,17 +73,17 @@ class GameActor extends Actor{
         for (players <- game.sharkList.values){
           holder :+= players
         }
+        val random = scala.util.Random.nextInt(holder.size - 1)
         for (i <- 0 until holder.size){
-          val random = scala.util.Random.nextInt(holder.size - 1)
           if (i != random){
             game.reverseTag(holder(i))
           }
         }
       }
-      else if(playerNumber == 1 & minnowNum == 1) {
+      else if(playerNumber == 1 & minnowNum == 1){
         println("game is being reset")
         var holder: List[Minnow] = List()
-        for (players <- game.minnowList.values){
+        for (players <- game.minnowList.values) {
           holder :+= players
         }
         game.tag(holder(0))
