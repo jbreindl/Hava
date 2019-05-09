@@ -21,7 +21,7 @@ function parseGameState(event) {
     }
 
     for (let shark of gameState['sharks']) {
-        addShark(shark['x'], shark['y'], shark['id'] === socket.id ? '#0000ff' : '#4dff24', 2.0);
+        addShark(shark['x'], shark['y'], shark['id'] === socket.id ? '#4dff24' : '#0000ff', 2.0);
     }
 
     for (let wall of gameState['sharkWalls']) {
@@ -29,7 +29,6 @@ function parseGameState(event) {
     }
 
 }
-//  hmmmmmmmmmm
 
 function drawGameBoard(gridSize) {
 
@@ -44,7 +43,7 @@ function drawGameBoard(gridSize) {
     context.fillStyle = '#66ffff';
     context.fillRect(0, 0, gridWidth * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
 
-    context.fillStyle = '#00ff7f';
+    context.fillStyle = '#faff23';
     context.fillRect(gridWidth * sizeOfGridSquares - sizeOfGridSquares, 0, gridWidth * sizeOfGridSquares, gridHeight * sizeOfGridSquares);
 
     context.strokeStyle = '#000000';

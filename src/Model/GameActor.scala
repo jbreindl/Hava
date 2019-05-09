@@ -49,7 +49,7 @@ class GameActor extends Actor{
         println("playerNumber")
         print(playerNumber)
         println("minnowNumber")
-        print(minnowNum)
+        println(minnowNum)
       }
     case message: MovePlayer =>
       game.playerMap(message.username).move(new PhysicsVector(message.x, message.y))
@@ -62,18 +62,13 @@ class GameActor extends Actor{
       sharkNum = game.sharkList.size
       minnowNum = game.minnowList.size
       playerNumber = game.playerMap.size
-      println("Players")
-      println(playerNumber)
-      println("sharks")
-      println(sharkNum)
-      println("Minnows")
-      println(minnowNum)
 
     case SendGameState =>
       sender() ! GameState(game.gameState())
 
     case resetGame =>
       if (playerNumber >= 2 & minnowNum == 0){
+        println("game is being reset")
         var holder: List[Shark] = List()
         for (players <- game.sharkList.values){
           holder :+= players
@@ -85,8 +80,14 @@ class GameActor extends Actor{
           }
         }
       }
-
-
-
+      else if(playerNumber == 1 & minnowNum == 1) {
+        println("game is being reset")
+        var holder: List[Minnow] = List()
+        for (players <- game.minnowList.values){
+          holder :+= players
+        }
+        game.tag(holder(0))
+      }
   }
+
 }

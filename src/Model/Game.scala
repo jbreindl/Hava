@@ -69,6 +69,7 @@ class Game {
       sharkList += (id-> shark)
       playerMap += (id -> shark)
       world.objects :+= shark
+      println(id + "became a shark")
     }
       //pushing is difficult
     else{
@@ -84,17 +85,13 @@ class Game {
       minnowList += (id-> minnow)
       playerMap += (id -> minnow)
       world.objects :+= minnow
+      println(id + " " + "became a minnow")
     }
     //pushing is difficult
     else{
       removePlayer(id)
       addMinnow(id)
     }
-//    val minnow = new Minnow(MinnowSpawn(), new PhysicsVector(0,0))
-//    minnow.id = id
-//    minnowList += (id-> minnow)
-//    playerMap += (id -> minnow)
-//    world.objects :+= minnow
   }
 
   def removePlayer(id: String): Unit ={
@@ -102,28 +99,16 @@ class Game {
       sharkList(id).destroy()
       sharkList -= id
       playerMap -= id
+      println(id + " " + "left the game")
     }
     else{
       minnowList(id).destroy()
       minnowList -= id
       playerMap -= id
+      println(id + " " + "left the game")
     }
   }
 
-  def resetplayers(id: String): Unit = {
-    var random = scala.util.Random.nextInt(1)
-    if (random == 1) {
-      if (playerMap.size == 0 & sharkList.size == 0) {
-        addShark(id)
-      }
-      else {
-        addMinnow(id)
-      }
-    }
-    else{
-        resetplayers(id)
-      }
-  }
 
 
   def update(): Unit = {
@@ -163,6 +148,7 @@ class Game {
       for (minnow <- minnowList.values){
         if(shark.location.distance2d(minnow.location) <= shark.fishSize) {
           tag(minnow)
+          println(minnow.id + " " + "has been tagged by" + " "  + shark.id)
         }
       }
     }
@@ -174,17 +160,19 @@ class Game {
       if (minnow.location.x > 29) {
         minnow.location.x = minnowPoint.x + 0.5
         minnow.location.y = minnowPoint.y + 0.5
+        println(minnow.id + " " + "made it to the end zone")
       }
     }
   }
+
   def checkForBound(): Unit={
     for (shark <- sharkList.values){
       if(shark.location.x < 4){
         shark.location = sharkSpawn()
+        println(shark.id + " " + "has gone out of shark bounds")
       }
     }
   }
-//I forgot to push
 
   def gameState(): String = {
     val gameState: Map[String, JsValue] = Map(
