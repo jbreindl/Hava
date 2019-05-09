@@ -29,6 +29,7 @@ function parseGameState(event) {
     }
 
 }
+//comment
 
 function drawGameBoard(gridSize) {
 
